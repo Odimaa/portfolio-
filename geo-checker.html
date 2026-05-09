@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GEO Brand Checker — Allen Horsfall</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#181818;--accent:#b8f542;--accent2:#7ee832;--white:#f0ede6;--muted:#888880;--border:rgba(255,255,255,0.07);--display:'Syne',sans-serif;--body:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--body);font-size:16px;line-height:1.6;min-height:100vh;}
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);z-index:50;}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.back-link{padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-size:0.8rem;transition:all 0.2s;}
+.back-link:hover{border-color:var(--accent);color:var(--accent);}
+.hero{padding:60px 48px 36px;max-width:840px;}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;border:1px solid rgba(184,245,66,0.3);background:rgba(184,245,66,0.06);font-size:0.7rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;}
+.tdot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+h1{font-family:var(--display);font-size:clamp(2.4rem,5vw,4rem);font-weight:800;letter-spacing:-0.04em;line-height:1.02;margin-bottom:16px;}
+h1 em{font-style:normal;color:var(--accent);}
+.subtitle{font-size:1rem;color:rgba(240,237,230,0.6);max-width:600px;line-height:1.75;font-weight:300;}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:32px 48px 0;max-width:1000px;}
+.ic{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;}
+.ic-icon{font-size:1.4rem;margin-bottom:10px;}
+.ic-title{font-family:var(--display);font-size:0.85rem;font-weight:700;color:var(--accent);margin-bottom:8px;}
+.ic-text{font-size:0.8rem;color:rgba(240,237,230,0.5);line-height:1.6;font-weight:300;}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 48px;margin-top:40px;}
+.tab{padding:14px 22px;border:none;background:transparent;color:var(--muted);font-family:var(--body);font-size:0.84rem;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s;}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab:hover:not(.active){color:rgba(240,237,230,0.7);}
+.panel{display:none;padding:48px;}
+.panel.active{display:block;}
+.form-wrap{max-width:740px;}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+.f{display:flex;flex-direction:column;gap:7px;}
+.f.full{grid-column:span 2;}
+label{font-size:0.7rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;}
+.ln{font-size:0.7rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;}
+input,select{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--white);font-family:var(--body);font-size:0.88rem;outline:none;transition:border-color 0.2s;width:100%;}
+input:focus,select:focus{border-color:rgba(184,245,66,0.5);}
+input::placeholder{color:var(--muted);}
+select option{background:var(--bg2);}
+.pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{padding:7px 14px;border-radius:100px;border:1px solid var(--border);background:transparent;color:rgba(240,237,230,0.55);font-size:0.78rem;cursor:pointer;transition:all 0.2s;user-select:none;}
+.pill.on{border-color:var(--accent);background:rgba(184,245,66,0.08);color:var(--accent);font-weight:600;}
+.genbtn{width:100%;padding:15px;background:var(--accent);color:#0a0a0a;font-family:var(--display);font-weight:800;font-size:0.95rem;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.genbtn:hover{background:var(--accent2);transform:translateY(-2px);}
+.out-wrap{max-width:900px;}
+.out-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;gap:16px;flex-wrap:wrap;}
+.out-head h2{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;}
+.out-head p{font-size:0.82rem;color:var(--muted);margin-top:4px;}
+.btns{display:flex;gap:8px;flex-wrap:wrap;}
+.abtn{padding:9px 18px;border-radius:100px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--white);}
+.abtn:hover{border-color:rgba(184,245,66,0.4);background:rgba(184,245,66,0.06);}
+.abtn.p{background:var(--accent);border-color:var(--accent);color:#0a0a0a;}
+.abtn.p:hover{background:var(--accent2);}
+.psw{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+.pb{padding:7px 16px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.pb.active{border-color:var(--accent);background:rgba(184,245,66,0.08);color:var(--accent);}
+.pb:hover:not(.active){color:rgba(240,237,230,0.7);}
+.ptip{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:13px 18px;margin-bottom:24px;font-size:0.81rem;color:rgba(240,237,230,0.6);line-height:1.6;}
+.ptip strong{color:var(--white);font-weight:500;}
+.pcat{margin-bottom:28px;}
+.catheader{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.catname{font-family:var(--display);font-size:0.75rem;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+.catcnt{padding:2px 9px;border-radius:100px;background:var(--bg3);font-size:0.68rem;color:var(--muted);}
+.pi{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:7px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;transition:border-color 0.2s;cursor:pointer;}
+.pi:hover{border-color:rgba(184,245,66,0.25);}
+.pt{font-size:0.85rem;color:rgba(240,237,230,0.78);line-height:1.5;font-family:monospace;flex:1;}
+.cpbtn{padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.68rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.cpbtn:hover,.cpbtn.done{border-color:var(--accent);color:var(--accent);}
+.cpbtn.done{background:rgba(184,245,66,0.08);}
+.sc-intro h2{font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;}
+.sc-intro p{font-size:0.88rem;color:rgba(240,237,230,0.6);line-height:1.7;font-weight:300;max-width:640px;margin-bottom:24px;}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;padding:18px 20px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;}
+.li{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:rgba(240,237,230,0.6);}
+.ld{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.stk{position:sticky;top:58px;background:rgba(10,10,10,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 0;margin-bottom:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;z-index:40;}
+.sbig{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--accent);}
+.smax{font-size:0.82rem;color:var(--muted);}
+.sbar-w{flex:1;max-width:240px;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.sbar{height:100%;background:var(--accent);border-radius:3px;transition:width 0.4s ease;width:0%;}
+.slbl{font-size:0.78rem;color:var(--muted);}
+.sc-plat{margin-bottom:36px;}
+.sc-plat-head{font-family:var(--display);font-size:0.95rem;font-weight:700;color:var(--accent);padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sc-cat{margin-bottom:20px;}
+.sc-cat-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sc-row{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:8px;}
+.sc-pt{font-size:0.82rem;color:rgba(240,237,230,0.7);font-family:monospace;margin-bottom:10px;line-height:1.5;}
+.sc-opts{display:flex;gap:7px;flex-wrap:wrap;}
+.so{padding:5px 13px;border-radius:100px;border:1px solid var(--border);background:transparent;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--muted);}
+.so[data-v="3"]{border-color:rgba(184,245,66,0.25);}
+.so[data-v="3"]:hover,.so[data-v="3"].on{background:rgba(184,245,66,0.1);border-color:var(--accent);color:var(--accent);}
+.so[data-v="2"]{border-color:rgba(100,200,255,0.2);}
+.so[data-v="2"]:hover,.so[data-v="2"].on{background:rgba(100,200,255,0.08);border-color:rgba(100,200,255,0.6);color:rgba(120,220,255,0.9);}
+.so[data-v="1"]{border-color:rgba(255,190,50,0.2);}
+.so[data-v="1"]:hover,.so[data-v="1"].on{background:rgba(255,190,50,0.07);border-color:rgba(255,190,50,0.5);color:rgba(255,200,60,0.9);}
+.so[data-v="0"]{border-color:rgba(255,90,90,0.2);}
+.so[data-v="0"]:hover,.so[data-v="0"].on{background:rgba(255,90,90,0.07);border-color:rgba(255,90,90,0.5);color:rgba(255,110,110,0.9);}
+.so[data-v="-1"]{border-color:rgba(160,40,40,0.2);}
+.so[data-v="-1"]:hover,.so[data-v="-1"].on{background:rgba(160,40,40,0.08);border-color:rgba(200,60,60,0.6);color:rgba(220,80,80,0.9);}
+.res-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:700px;margin-top:36px;}
+.res-card.hidden{display:none;}
+.rbig{font-family:var(--display);font-size:3.5rem;font-weight:800;letter-spacing:-0.04em;line-height:1;margin-bottom:6px;}
+.rlbl{font-size:0.82rem;color:var(--muted);margin-bottom:20px;}
+.rinterp{font-size:0.9rem;line-height:1.75;padding:18px 22px;border-radius:12px;border-left:3px solid var(--accent);background:rgba(184,245,66,0.04);color:rgba(240,237,230,0.75);font-weight:300;margin-bottom:24px;}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ac{padding:18px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;}
+.act{font-family:var(--display);font-size:0.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;}
+.acd{font-size:0.8rem;color:rgba(240,237,230,0.6);line-height:1.6;font-weight:300;}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;}
+.tc{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:26px;}
+.tc-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.tc-plat{font-family:var(--display);font-size:0.95rem;font-weight:800;}
+.tc-tag{padding:3px 9px;border-radius:100px;background:rgba(184,245,66,0.07);border:1px solid rgba(184,245,66,0.2);font-size:0.67rem;font-weight:600;color:var(--accent);}
+.ti{display:flex;gap:10px;margin-bottom:9px;font-size:0.8rem;line-height:1.55;}
+.ti::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:0px;}
+.tid{color:rgba(240,237,230,0.6);font-weight:300;}
+@media(max-width:768px){nav,.hero,.tabs,.panel{padding-left:24px;padding-right:24px;}.cards3,.tgrid{grid-template-columns:1fr;padding-left:24px;padding-right:24px;}.fg,.ag{grid-template-columns:1fr;}.f.full{grid-column:span 1;}.stk{padding-left:24px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">AH<span>.</span></a>
+  <a class="back-link" href="index.html">← Portfolio</a>
+</nav>
+<div class="hero">
+  <div class="tag"><span class="tdot"></span>Free Tool</div>
+  <h1>GEO Brand <em>Checker</em></h1>
+  <p class="subtitle">Most brands have no idea how they appear when someone asks ChatGPT, Gemini, or Perplexity a question. This tool generates custom audit prompts, walks you through scoring your results, and gives you an action plan to improve your AI visibility.</p>
+</div>
+<div class="cards3">
+  <div class="ic"><div class="ic-icon">🔍</div><div class="ic-title">What is GEO?</div><div class="ic-text">Generative Engine Optimization is how visible and accurately your brand appears in AI-generated answers. As more people search via AI tools instead of Google, your presence in those answers is becoming a real competitive channel.</div></div>
+  <div class="ic"><div class="ic-icon">📋</div><div class="ic-title">How it works</div><div class="ic-text">Enter your brand details and get custom prompts covering 8 question categories. Paste each prompt into your chosen AI platforms, score what you find, and get a total score with interpretation and next steps.</div></div>
+  <div class="ic"><div class="ic-icon">⏱</div><div class="ic-title">How long it takes</div><div class="ic-text">Generating prompts takes 30 seconds. Running a full audit across 4 platforms takes about 20 to 30 minutes. Save your score and repeat monthly to track progress.</div></div>
+</div>
+<div class="tabs">
+  <button class="tab active" id="t1" onclick="sw('generate')">1. Generate prompts</button>
+  <button class="tab" id="t2" onclick="sw('score')">2. Score results</button>
+  <button class="tab" id="t3" onclick="sw('tips')">Platform tips</button>
+</div>
+
+<!-- GENERATE -->
+<div class="panel active" id="panel-generate">
+<div class="form-wrap">
+<div class="fg">
+  <div class="f"><label>Brand name <span class="ln">required</span></label><input id="bn" placeholder="e.g. BellaNaija, Flutterwave, Bumpa"/></div>
+  <div class="f"><label>Industry or Category</label><input id="ind" placeholder="e.g. fintech, media, health, fashion, FMCG"/></div>
+  <div class="f"><label>Country or Market</label><input id="mkt" placeholder="e.g. Nigeria, West Africa, Ghana"/></div>
+  <div class="f"><label>Brand type</label>
+    <select id="bt">
+      <option value="consumer">Consumer brand (B2C)</option>
+      <option value="b2b">Business brand (B2B)</option>
+      <option value="media">Media or content brand</option>
+      <option value="personal">Personal brand</option>
+      <option value="ngo">NGO or non-profit</option>
+      <option value="startup">Early-stage startup</option>
+    </select>
+  </div>
+  <div class="f"><label>Main competitor <span class="ln">optional</span></label><input id="comp" placeholder="Comparison prompts get more specific with this"/></div>
+  <div class="f"><label>Key product or service <span class="ln">optional</span></label><input id="prod" placeholder="e.g. payment infrastructure, bridal content"/></div>
+  <div class="f full"><label>What problem does your brand solve? <span class="ln">optional but improves prompts</span></label><input id="prob" placeholder="e.g. helps African businesses accept global payments"/></div>
+  <div class="f full">
+    <label>Platforms to audit</label>
+    <div class="pills" id="plats">
+      <span class="pill on" data-v="ChatGPT">ChatGPT</span>
+      <span class="pill on" data-v="Gemini">Gemini</span>
+      <span class="pill on" data-v="Claude">Claude</span>
+      <span class="pill on" data-v="Perplexity">Perplexity</span>
+      <span class="pill" data-v="Meta AI">Meta AI</span>
+      <span class="pill" data-v="Copilot">Copilot</span>
+    </div>
+  </div>
+</div>
+<button class="genbtn" onclick="gen()">Generate my GEO audit prompts</button>
+<div id="out" style="display:none;margin-top:40px;"></div>
+</div>
+</div>
+
+<!-- SCORE -->
+<div class="panel" id="panel-score">
+  <div id="sc-empty" style="text-align:center;padding:60px 20px;">
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:20px;">Generate your prompts first on the previous tab, run them in each AI platform, then come back here to score what you found.</p>
+    <button onclick="sw('generate')" style="padding:10px 22px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--white);font-size:0.82rem;cursor:pointer;">Generate prompts first</button>
+  </div>
+  <div id="sc-content" style="display:none;">
+    <div class="sc-intro">
+      <h2>Score your <em style="font-style:normal;color:var(--accent)">results</em></h2>
+      <p>For each prompt below, paste it into the AI platform, read the response, then select how your brand appeared. Be honest. A realistic baseline is more valuable than an inflated one.</p>
+    </div>
+    <div class="leg">
+      <div class="li"><div class="ld" style="background:var(--accent)"></div>Prominent (3) — Named clearly with accurate detail</div>
+      <div class="li"><div class="ld" style="background:rgba(100,200,255,0.8)"></div>Mentioned (2) — Named but briefly</div>
+      <div class="li"><div class="ld" style="background:rgba(255,190,50,0.8)"></div>Indirect (1) — Vaguely referenced or implied</div>
+      <div class="li"><div class="ld" style="background:rgba(255,90,90,0.8)"></div>Not found (0) — Not mentioned</div>
+      <div class="li"><div class="ld" style="background:rgba(180,50,50,0.8)"></div>Wrong info (−1) — Mentioned incorrectly</div>
+    </div>
+    <div class="stk">
+      <div><span class="sbig" id="sdisp">0</span><span class="smax" id="smax"> / 0</span></div>
+      <div class="sbar-w"><div class="sbar" id="sbar"></div></div>
+      <div class="slbl" id="slbl">Score your responses above</div>
+      <button class="abtn p" onclick="showRes()" style="padding:9px 18px;font-size:0.78rem;">See my results</button>
+    </div>
+    <div id="sc-prompts"></div>
+    <div class="res-card hidden" id="res-card"></div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="panel" id="panel-tips">
+  <h2 style="font-family:var(--display);font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px;">How each AI platform handles brand mentions</h2>
+  <p style="font-size:0.88rem;color:rgba(240,237,230,0.5);margin-bottom:28px;font-weight:300;">Understanding how each platform works helps you interpret your scores and know where to invest your GEO effort.</p>
+  <div class="tgrid">
+    <div class="tc"><div class="tc-head"><div class="tc-plat">ChatGPT</div><div class="tc-tag">OpenAI</div></div>
+      <div class="ti"><div class="tid">Draws from pre-training data. Strong Wikipedia pages, news coverage, and industry blog mentions are the biggest signals.</div></div>
+      <div class="ti"><div class="tid">Test both standard and web browsing mode. The gap between them tells you whether your historical web presence is strong or weak.</div></div>
+      <div class="ti"><div class="tid">To improve: get onto well-known industry listicles, press coverage, and authoritative directories. Wikipedia presence is a significant signal across all OpenAI models.</div></div>
+    </div>
+    <div class="tc"><div class="tc-head"><div class="tc-plat">Gemini</div><div class="tc-tag">Google</div></div>
+      <div class="ti"><div class="tid">Closely integrated with Google Search signals. Brands with strong SEO, verified Google Business profiles, and Google News coverage perform better here.</div></div>
+      <div class="ti"><div class="tid">Your Google Knowledge Panel directly influences how Gemini describes your brand. Claiming and optimising it is a high-value action.</div></div>
+      <div class="ti"><div class="tid">To improve: optimise your Google Business profile, ensure your website has correct structured data and schema markup, and build presence on sites Google trusts.</div></div>
+    </div>
+    <div class="tc"><div class="tc-head"><div class="tc-plat">Perplexity</div><div class="tc-tag">Real-time search</div></div>
+      <div class="ti"><div class="tid">Pulls live search results and always cites sources. This makes it the most transparent platform for auditing — you can see exactly where the information came from.</div></div>
+      <div class="ti"><div class="tid">If your brand appears, note which sources cited you. Those are your highest-leverage channels for GEO. If competitors appear instead, the citations show you exactly where your content gap is.</div></div>
+      <div class="ti"><div class="tid">To improve: get cited in publications that Perplexity trusts — major news outlets, credible industry publications, and structured directories.</div></div>
+    </div>
+    <div class="tc"><div class="tc-head"><div class="tc-plat">Claude</div><div class="tc-tag">Anthropic</div></div>
+      <div class="ti"><div class="tid">More cautious about factual claims on specific brands, especially smaller or regional ones. Absence is not always failure — Claude may simply not have enough reliable data to make a claim.</div></div>
+      <div class="ti"><div class="tid">Claude performs better when there is consistent, high-quality long-form content about your brand across multiple credible sources.</div></div>
+      <div class="ti"><div class="tid">To improve: focus on depth of coverage. Long-form features and case studies carry more weight here than brief mentions across many sites.</div></div>
+    </div>
+    <div class="tc"><div class="tc-head"><div class="tc-plat">Meta AI</div><div class="tc-tag">Meta</div></div>
+      <div class="ti"><div class="tid">Integrated into WhatsApp, Instagram, and Facebook. Has access to public social content. Consumer brands with strong Instagram presence may score differently here than on other platforms.</div></div>
+      <div class="ti"><div class="tid">Ensure your Facebook and Instagram profiles are complete, verified where possible, and describe your brand clearly in the bio sections.</div></div>
+    </div>
+    <div class="tc"><div class="tc-head"><div class="tc-plat">General principle</div><div class="tc-tag">All platforms</div></div>
+      <div class="ti"><div class="tid">Run this audit monthly on the same dates. AI models update. A low score today can improve in 4 to 8 weeks with consistent content action.</div></div>
+      <div class="ti"><div class="tid">Being cited in content that AI tools trust matters more than social media volume. One article in a credible publication outweighs 50 Instagram posts for GEO purposes.</div></div>
+      <div class="ti"><div class="tid">Create content that directly answers the kinds of questions your target audience asks AI tools. FAQ pages, how-it-works explainers, and comparison articles are all strong GEO content types.</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let prompts=[], selPlats=[], scores={}, curPlat='';
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>p.classList.toggle('on')));
+
+const TIPS={
+  ChatGPT:'<strong>ChatGPT tip:</strong> Use both standard mode and web browsing mode if available. Standard mode uses training data only. Browsing mode fetches live results. The gap between them shows whether your brand has a strong historical web presence or needs more recent coverage.',
+  Gemini:'<strong>Gemini tip:</strong> Gemini integrates with Google Search. If your brand has a Google Knowledge Panel or strong SEO rankings, it tends to surface here reliably. Try the same prompt in Gemini and compare it to a Google Search to see whether they align.',
+  Claude:'<strong>Claude tip:</strong> Claude is cautious. If it says it has limited information about your brand, that is not necessarily a bad score — it may just mean your brand needs more authoritative long-form coverage. Score conservatively and note which prompts it refuses to answer confidently.',
+  Perplexity:'<strong>Perplexity tip:</strong> This is your most transparent platform. It always cites sources. If your brand appears, check exactly which sources drove it. If it does not, the citations will show which competitors are being cited instead — that tells you exactly where to create content.',
+  'Meta AI':'<strong>Meta AI tip:</strong> Test this inside WhatsApp or Instagram for the most authentic result. Meta AI integrates with your social graph so results can vary. Focus on whether the brand description is accurate rather than just whether it appears.',
+  Copilot:'<strong>Copilot tip:</strong> Microsoft Copilot integrates tightly with Bing search results. Your Bing SEO and your ChatGPT score will often correlate. Strong Bing presence generally translates to better Copilot visibility.',
+};
+
+const TYPENOUNS={consumer:['brand','company','product'],b2b:['company','service','solution'],media:['media brand','publication','platform'],personal:['professional','expert','consultant'],ngo:['organisation','nonprofit','initiative'],startup:['startup','company','platform']};
+
+function buildPrompts(brand,ind,mkt,type,comp,prod,prob){
+  const loc=mkt?` in ${mkt}`:'';
+  const cat=ind||'this industry';
+  const n=TYPENOUNS[type]||TYPENOUNS.consumer;
+  const pr=prod||cat;
+  const pb=prob||`challenges in ${cat}`;
+  return [
+    {cat:'Brand recognition',ps:[
+      `Tell me about ${brand}.`,
+      `What is ${brand} and what do they do?`,
+      `Give me a summary of ${brand} as a ${n[0]}${loc}.`,
+      `Is ${brand} a well-established ${n[1]}${loc}?`,
+    ]},
+    {cat:'Category visibility',ps:[
+      `What are the best ${cat} ${n[1]}s${loc}?`,
+      `Which ${cat} ${n[1]}s should someone know about${mkt?' in '+mkt:''}?`,
+      `Recommend the top 5 ${n[1]}s in ${cat}${loc}.`,
+      `Who are the most trusted names in ${cat}${loc}?`,
+      `What are the leading ${cat} ${n[1]}s I should consider${loc}?`,
+    ]},
+    {cat:'Problem and solution discovery',ps:[
+      `I am looking for a ${n[1]} that helps with ${pb}. What do you recommend?`,
+      `What ${n[1]}s exist for people who need ${pr}${loc}?`,
+      `Who offers the best solution for ${pb}${loc}?`,
+      `I need help with ${pb}. Which ${n[1]}s come highly recommended${loc}?`,
+    ]},
+    {cat:'Competitive comparison',ps:comp?[
+      `How does ${brand} compare to ${comp}?`,
+      `What is the difference between ${brand} and ${comp}?`,
+      `Which is better for ${pr}: ${brand} or ${comp}?`,
+      `What are the main alternatives to ${comp}${loc}?`,
+      `I use ${comp} — should I switch to ${brand}?`,
+    ]:[
+      `Who are the main competitors of ${brand}?`,
+      `What are good alternatives to ${brand}?`,
+      `How does ${brand} compare to others in ${cat}?`,
+      `What are people using instead of ${brand} for ${pr}?`,
+    ]},
+    {cat:'Trust and credibility',ps:[
+      `Is ${brand} trustworthy?`,
+      `What do people say about ${brand}?`,
+      `Has ${brand} been featured in any major publications or news${loc}?`,
+      `What is ${brand}'s reputation in ${cat}?`,
+      `Is ${brand} a legitimate and credible ${n[0]}?`,
+    ]},
+    {cat:'Discovery and recommendation',ps:[
+      `I heard about ${brand}. Is it worth using?`,
+      `Can you recommend ${brand} for ${pr}?`,
+      `Someone told me to try ${brand}. What should I know?`,
+    ]},
+    {cat:'Geographic and market context',ps:mkt?[
+      `What are the most well-known ${cat} ${n[1]}s in ${mkt}?`,
+      `Which ${n[1]}s are leading the ${cat} space in ${mkt}?`,
+      `Tell me about the ${cat} industry in ${mkt} and who the key players are.`,
+      `Is ${brand} popular or well-regarded in ${mkt}?`,
+    ]:[
+      `What are the most well-known ${cat} ${n[1]}s in Africa?`,
+      `Which African ${n[1]}s are doing interesting work in ${cat}?`,
+      `Tell me about the ${cat} landscape in West Africa.`,
+    ]},
+    {cat:'Expert and media framing',ps:[
+      `If an industry expert was asked about ${cat}${loc}, would ${brand} come up?`,
+      `Has ${brand} received press coverage or been cited in reports?`,
+      `Is ${brand} mentioned in any notable industry rankings or roundups?`,
+    ]},
+  ];
+}
+
+function gen(){
+  const brand=document.getElementById('bn').value.trim();
+  if(!brand){alert('Please enter a brand name.');return;}
+  const ind=document.getElementById('ind').value.trim();
+  const mkt=document.getElementById('mkt').value.trim();
+  const type=document.getElementById('bt').value;
+  const comp=document.getElementById('comp').value.trim();
+  const prod=document.getElementById('prod').value.trim();
+  const prob=document.getElementById('prob').value.trim();
+  selPlats=[...document.querySelectorAll('#plats .pill.on')].map(p=>p.dataset.v);
+  if(!selPlats.length){alert('Select at least one platform.');return;}
+  prompts=buildPrompts(brand,ind,mkt,type,comp,prod,prob);
+  scores={};
+  curPlat=selPlats[0];
+  renderOut(brand);
+  renderScoring();
+}
+
+function renderOut(brand){
+  const total=prompts.reduce((a,c)=>a+c.ps.length,0);
+  const pbtns=selPlats.map(p=>`<button class="pb ${p===curPlat?'active':''}" onclick="setPlat('${p}')">${p}</button>`).join('');
+  let ph='';
+  prompts.forEach(c=>{
+    ph+=`<div class="pcat"><div class="catheader"><span class="catname">${c.cat}</span><span class="catcnt">${c.ps.length}</span></div>`;
+    c.ps.forEach(p=>{
+      const esc=p.replace(/'/g,"\\'");
+      ph+=`<div class="pi" onclick="cp('${esc}',this)"><span class="pt">${p}</span><button class="cpbtn" onclick="event.stopPropagation();cp('${esc}',this.parentElement)">Copy</button></div>`;
+    });
+    ph+='</div>';
+  });
+  document.getElementById('out').style.display='block';
+  document.getElementById('out').innerHTML=`
+    <div class="out-wrap">
+      <div class="out-head">
+        <div><h2>${total} prompts for ${brand}</h2><p>Click any prompt to copy it. Paste into your chosen AI platform and note what comes back.</p></div>
+        <div class="btns">
+          <button class="abtn" onclick="copyAll()">Copy all</button>
+          <button class="abtn" onclick="dlTxt()">Download .txt</button>
+          <button class="abtn p" onclick="sw('score')">Score results →</button>
+        </div>
+      </div>
+      <div class="psw">${pbtns}</div>
+      <div class="ptip" id="ptip">${TIPS[curPlat]||''}</div>
+      ${ph}
+    </div>`;
+}
+
+function setPlat(p){
+  curPlat=p;
+  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('active',b.textContent===p));
+  const t=document.getElementById('ptip');
+  if(t)t.innerHTML=TIPS[p]||'';
+}
+
+function renderScoring(){
+  document.getElementById('sc-empty').style.display='none';
+  document.getElementById('sc-content').style.display='block';
+  const max=prompts.reduce((a,c)=>a+c.ps.length,0)*selPlats.length;
+  document.getElementById('smax').textContent=` / ${max*3}`;
+  let html='';
+  selPlats.forEach(plat=>{
+    html+=`<div class="sc-plat"><div class="sc-plat-head">Testing on: ${plat}</div>`;
+    prompts.forEach((cat,ci)=>{
+      html+=`<div class="sc-cat"><div class="sc-cat-title">${cat.cat}</div>`;
+      cat.ps.forEach((p,pi)=>{
+        const k=`${plat}-${ci}-${pi}`;
+        html+=`<div class="sc-row"><div class="sc-pt">${p}</div><div class="sc-opts">
+          ${[['3','Prominent'],['2','Mentioned'],['1','Indirect'],['0','Not found'],['-1','Wrong info']].map(([v,l])=>`<button class="so" data-v="${v}" onclick="setSc('${k}',${v},this)">${l}</button>`).join('')}
+        </div></div>`;
+      });
+      html+='</div>';
+    });
+    html+='</div>';
+  });
+  document.getElementById('sc-prompts').innerHTML=html;
+  document.getElementById('res-card').classList.add('hidden');
+}
+
+function setSc(k,v,btn){
+  scores[k]=v;
+  btn.closest('.sc-row').querySelectorAll('.so').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  updScore();
+}
+
+function updScore(){
+  const vals=Object.values(scores).map(Number);
+  const tot=vals.reduce((a,b)=>a+b,0);
+  const max=prompts.reduce((a,c)=>a+c.ps.length,0)*selPlats.length*3;
+  const pct=Math.max(0,(tot/max)*100);
+  document.getElementById('sdisp').textContent=tot;
+  document.getElementById('sbar').style.width=pct+'%';
+  document.getElementById('slbl').textContent=pct>=70?'Strong visibility':pct>=40?'Moderate visibility':'Low visibility';
+}
+
+function showRes(){
+  const vals=Object.values(scores).map(Number);
+  const tot=vals.reduce((a,b)=>a+b,0);
+  const max=prompts.reduce((a,c)=>a+c.ps.length,0)*selPlats.length*3;
+  const pct=Math.max(0,Math.round((tot/max)*100));
+  let col,lbl,interp,acts;
+  if(pct>=70){
+    col='var(--accent)';lbl='Strong GEO visibility';
+    interp='Your brand has solid visibility in AI-generated answers. People searching your category are likely encountering your brand in responses. The focus now is consistency and accuracy — making sure what AI tools say about you is correct and that you maintain this as competitors start to catch up.';
+    acts=[['Monitor monthly','GEO scores can erode as AI models update and competitors build coverage. Run this audit on the same dates every month.'],['Fix wrong information','If any prompts returned incorrect details, address the source content. A Wikipedia correction, press release, or website update can influence future model training.'],['Expand to depth','Move from being mentioned to being prominently featured. Create detailed, authoritative content that positions your brand as the definitive answer to category questions.'],['Track competitors','Run this audit on your main competitors. Your relative score matters as much as your absolute score.']];
+  } else if(pct>=40){
+    col='rgba(255,190,50,0.9)';lbl='Moderate GEO presence';
+    interp='Your brand appears in some AI responses but inconsistently. You likely score well on direct name searches but lower on category and discovery queries. This is where most brands sit — and there is real competitive advantage in closing the gap before this becomes mainstream practice.';
+    acts=[['Target category prompts','You are likely scoring low on category visibility and problem-solution prompts. These are the highest-value queries — someone discovering you for the first time. Create content specifically designed to appear in those answers.'],['Get cited in authoritative sources','Press coverage in major publications, inclusion in industry roundups, and Wikipedia mentions improve AI visibility across all platforms faster than almost anything else.'],['Optimise your Google presence','Gemini and Copilot pull heavily from Google signals. A complete Google Business Profile and Knowledge Panel has an outsized impact.'],['Create direct-answer content','FAQ pages, explainers, and comparison articles that answer the kinds of questions people ask AI tools are indexed well by most AI retrieval pipelines.']];
+  } else {
+    col='rgba(255,90,90,0.8)';lbl='Low GEO visibility';
+    interp='Your brand has minimal presence in AI-generated answers. For category searches, comparison questions, and problem-solution queries, your brand is largely invisible. This is actually an opportunity — GEO strategy is early enough that consistent effort now can establish a clear lead over competitors who are not yet thinking about this.';
+    acts=[['Start with Wikipedia','A Wikipedia page for your brand, if genuinely warranted, is one of the highest-impact single actions for AI visibility across all platforms. It is widely cited by AI models as a credibility signal.'],['Get into industry publications','Aim for feature coverage in 2 to 3 credible industry publications in the next 90 days. Press coverage is a primary signal AI models use to evaluate brand credibility.'],['Build an informational content layer','Create a clear About page, company FAQ, and category explainers on your website. These directly feed AI training and retrieval pipelines.'],['Re-run in 30 days','After implementing even one or two of these actions, re-run the audit. GEO visibility can improve faster than SEO rankings. Some changes show up in model results within weeks.']];
+  }
+  const rc=document.getElementById('res-card');
+  rc.classList.remove('hidden');
+  rc.innerHTML=`<div class="rbig" style="color:${col};">${pct}%</div><div class="rlbl">${lbl} — ${tot} points out of ${max} possible</div><div class="rinterp">${interp}</div><h3 style="font-family:var(--display);font-size:0.78rem;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">What to do next</h3><div class="ag">${acts.map(([t,d])=>`<div class="ac"><div class="act">${t}</div><div class="acd">${d}</div></div>`).join('')}</div>`;
+  rc.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function cp(text,el){
+  navigator.clipboard.writeText(text).then(()=>{
+    const b=el.querySelector('.cpbtn');
+    if(b){const o=b.textContent;b.textContent='Copied!';b.classList.add('done');setTimeout(()=>{b.textContent=o;b.classList.remove('done');},1800);}
+  });
+}
+function copyAll(){
+  const t=prompts.flatMap(c=>[`\n${c.cat.toUpperCase()}`,...c.ps]).join('\n');
+  navigator.clipboard.writeText(t).then(()=>alert('All prompts copied.'));
+}
+function dlTxt(){
+  const brand=document.getElementById('bn').value.trim()||'Brand';
+  const lines=[`GEO AUDIT PROMPTS: ${brand}`,`Generated by Allen Horsfall GEO Brand Checker`,``,...prompts.flatMap(c=>[``,`${c.cat.toUpperCase()}`,...c.ps.map(p=>`- ${p}`)])];
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain'}));
+  a.download=`geo-audit-${brand.toLowerCase().replace(/\s+/g,'-')}.txt`;a.click();
+}
+function sw(id){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['t1','t2','t3'][i]==='t'+{'generate':1,'score':2,'tips':3}[id]));
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',['panel-generate','panel-score','panel-tips'][i]==='panel-'+id));
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Campaign M&E Generator — Allen Horsfall</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#181818;--accent:#b8f542;--accent2:#7ee832;--white:#f0ede6;--muted:#888880;--border:rgba(255,255,255,0.07);--display:'Syne',sans-serif;--body:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--body);font-size:16px;line-height:1.6;min-height:100vh;}
+nav{padding:18px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);z-index:50;}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.back-link{padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-size:0.8rem;transition:all 0.2s;}
+.back-link:hover{border-color:var(--accent);color:var(--accent);}
+.hero{padding:60px 48px 40px;max-width:800px;}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;border:1px solid rgba(184,245,66,0.3);background:rgba(184,245,66,0.06);font-size:0.7rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;}
+.tdot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+h1{font-family:var(--display);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:800;letter-spacing:-0.04em;line-height:1.02;margin-bottom:16px;}
+h1 em{font-style:normal;color:var(--accent);}
+.subtitle{font-size:1rem;color:rgba(240,237,230,0.6);max-width:620px;line-height:1.75;font-weight:300;}
+.main{display:grid;grid-template-columns:400px 1fr;gap:0;min-height:calc(100vh - 200px);}
+.form-col{padding:40px 40px 80px;border-right:1px solid var(--border);background:var(--bg2);}
+.out-col{padding:40px;overflow-y:auto;}
+.form-col h2,.out-col h2{font-family:var(--display);font-size:1rem;font-weight:700;margin-bottom:24px;letter-spacing:-0.01em;}
+.f{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+label{font-size:0.68rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;}
+.ln{font-size:0.68rem;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;margin-left:5px;}
+input,select,textarea{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;color:var(--white);font-family:var(--body);font-size:0.85rem;outline:none;transition:border-color 0.2s;width:100%;}
+input:focus,select:focus,textarea:focus{border-color:rgba(184,245,66,0.5);}
+input::placeholder,textarea::placeholder{color:var(--muted);}
+select option{background:var(--bg3);}
+textarea{resize:none;min-height:72px;}
+.pills{display:flex;flex-wrap:wrap;gap:7px;}
+.pill{padding:6px 13px;border-radius:100px;border:1px solid var(--border);background:transparent;color:rgba(240,237,230,0.55);font-size:0.76rem;cursor:pointer;transition:all 0.2s;user-select:none;}
+.pill.on{border-color:var(--accent);background:rgba(184,245,66,0.08);color:var(--accent);font-weight:600;}
+.genbtn{width:100%;padding:14px;background:var(--accent);color:#0a0a0a;font-family:var(--display);font-weight:800;font-size:0.9rem;border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;margin-top:12px;}
+.genbtn:hover{background:var(--accent2);transform:translateY(-1px);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+/* Output */
+.empty{text-align:center;padding:80px 20px;}
+.empty p{color:var(--muted);font-size:0.88rem;line-height:1.7;}
+.out-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;flex-wrap:wrap;gap:12px;}
+.out-title{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:-0.03em;}
+.out-sub{font-size:0.8rem;color:var(--muted);margin-top:4px;}
+.export-btn{padding:9px 18px;border-radius:100px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:0.76rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.export-btn:hover{background:rgba(184,245,66,0.08);}
+/* Output sections */
+.os{margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);}
+.os:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.os-title{font-family:var(--display);font-size:0.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.os-title::before{content:'';width:14px;height:2px;background:var(--accent);}
+/* KPI table */
+.kpi-table{width:100%;border-collapse:collapse;}
+.kpi-table th{font-size:0.68rem;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);}
+.kpi-table td{font-size:0.81rem;padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.4;vertical-align:top;}
+.kpi-table tr:last-child td{border-bottom:none;}
+.kpi-table td:first-child{color:var(--white);font-weight:500;}
+.kpi-table td:not(:first-child){color:rgba(240,237,230,0.6);}
+/* Timeline */
+.tl{display:flex;flex-direction:column;gap:0;}
+.tl-row{display:grid;grid-template-columns:80px 1fr;gap:0;}
+.tl-week{font-family:var(--display);font-size:0.75rem;font-weight:700;color:var(--accent);padding:12px 12px 12px 0;border-right:2px solid rgba(184,245,66,0.3);position:relative;}
+.tl-week::after{content:'';position:absolute;right:-5px;top:16px;width:8px;height:8px;background:var(--accent);border-radius:50%;}
+.tl-tasks{padding:10px 0 10px 16px;display:flex;flex-direction:column;gap:4px;}
+.tl-task{font-size:0.8rem;color:rgba(240,237,230,0.65);line-height:1.4;}
+.tl-task::before{content:'·';color:var(--accent);margin-right:6px;}
+/* Survey questions */
+.sq-item{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:13px 16px;margin-bottom:8px;}
+.sq-q{font-size:0.84rem;color:var(--white);font-weight:500;line-height:1.5;margin-bottom:4px;}
+.sq-meta{font-size:0.72rem;color:var(--muted);}
+/* Checklist */
+.cl{display:flex;flex-direction:column;gap:7px;}
+.ci{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;color:rgba(240,237,230,0.7);line-height:1.4;}
+.cbox{width:15px;height:15px;border:1.5px solid var(--accent);border-radius:4px;flex-shrink:0;margin-top:1px;}
+/* Risk register */
+.risk{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:13px 16px;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+.risk-text{font-size:0.82rem;color:rgba(240,237,230,0.7);line-height:1.5;}
+.risk-text strong{color:var(--white);font-weight:500;display:block;margin-bottom:3px;}
+.risk-sev{padding:3px 10px;border-radius:100px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;flex-shrink:0;}
+.risk-sev.high{background:rgba(255,90,90,0.1);border:1px solid rgba(255,90,90,0.3);color:rgba(255,110,110,0.9);}
+.risk-sev.med{background:rgba(255,190,50,0.1);border:1px solid rgba(255,190,50,0.3);color:rgba(255,200,60,0.9);}
+.risk-sev.low{background:rgba(184,245,66,0.08);border:1px solid rgba(184,245,66,0.25);color:var(--accent);}
+/* Tools */
+.tool-row{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;margin-bottom:7px;}
+.tool-name{font-family:var(--display);font-size:0.82rem;font-weight:700;color:var(--white);min-width:110px;}
+.tool-detail{font-size:0.78rem;color:rgba(240,237,230,0.6);line-height:1.4;flex:1;}
+.tool-cost{font-size:0.72rem;font-weight:600;color:var(--accent);white-space:nowrap;}
+/* Benchmarks */
+.bench-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.bench{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:13px;}
+.bench-plat{font-family:var(--display);font-size:0.78rem;font-weight:700;color:var(--accent);margin-bottom:8px;}
+.bench-item{font-size:0.78rem;color:rgba(240,237,230,0.6);line-height:1.5;margin-bottom:3px;}
+.bench-item strong{color:var(--white);}
+/* Print */
+@media print{nav,.form-col,.export-btn{display:none!important;}.main{grid-template-columns:1fr;}.out-col{padding:20px;}}
+@media(max-width:960px){.main{grid-template-columns:1fr;}.form-col{border-right:none;border-bottom:1px solid var(--border);}nav,.hero{padding-left:24px;padding-right:24px;}.form-col,.out-col{padding:28px 24px;}.bench-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">AH<span>.</span></a>
+  <a class="back-link" href="index.html">← Portfolio</a>
+</nav>
+<div class="hero">
+  <div class="tag"><span class="tdot"></span>Free Tool</div>
+  <h1>Campaign M&amp;E <em>Generator</em></h1>
+  <p class="subtitle">Fill in your campaign details and get a complete Monitoring and Evaluation framework: KPI table, survey question bank, week-by-week timeline, platform benchmarks, tools comparison, risk register, and pre/post-campaign checklists.</p>
+</div>
+
+<div class="main">
+  <!-- FORM -->
+  <div class="form-col">
+    <h2>Campaign details</h2>
+    <div class="f"><label>Campaign name</label><input id="cn" placeholder="e.g. #HerMoneyHerPower"/></div>
+    <div class="f"><label>Brand or organisation</label><input id="org" placeholder="e.g. BellaNaija"/></div>
+    <div class="f"><label>Campaign objective</label>
+      <select id="obj">
+        <option value="awareness">Brand or issue awareness</option>
+        <option value="engagement">Community engagement</option>
+        <option value="mindset">Mindset or behaviour change</option>
+        <option value="conversion">Conversions or sign-ups</option>
+        <option value="advocacy">Advocacy and fundraising</option>
+        <option value="launch">Product or service launch</option>
+        <option value="health">Public health awareness</option>
+      </select>
+    </div>
+    <div class="f"><label>Target audience</label><input id="aud" placeholder="e.g. Nigerian women aged 18 to 35"/></div>
+    <div class="f"><label>Campaign duration</label>
+      <select id="dur">
+        <option value="2">1 to 2 weeks</option>
+        <option value="4">3 to 4 weeks</option>
+        <option value="8">1 to 2 months</option>
+        <option value="16">3 to 6 months</option>
+      </select>
+    </div>
+    <div class="f"><label>Budget range <span class="ln">affects tool recommendations</span></label>
+      <select id="budget">
+        <option value="zero">No budget (organic only)</option>
+        <option value="small">Small (under $500)</option>
+        <option value="mid">Mid ($500 to $5,000)</option>
+        <option value="large">Large ($5,000+)</option>
+      </select>
+    </div>
+    <div class="divider"></div>
+    <div class="f"><label>Platforms</label>
+      <div class="pills" id="plats">
+        <span class="pill on" data-v="Instagram">Instagram</span>
+        <span class="pill" data-v="Twitter/X">Twitter/X</span>
+        <span class="pill" data-v="TikTok">TikTok</span>
+        <span class="pill" data-v="Facebook">Facebook</span>
+        <span class="pill" data-v="YouTube">YouTube</span>
+        <span class="pill" data-v="WhatsApp">WhatsApp</span>
+        <span class="pill" data-v="LinkedIn">LinkedIn</span>
+        <span class="pill" data-v="Radio">Radio</span>
+        <span class="pill" data-v="Website">Website</span>
+      </div>
+    </div>
+    <div class="f"><label>Survey or polling component?</label>
+      <select id="survey">
+        <option value="yes">Yes — include survey questions</option>
+        <option value="no">No survey component</option>
+      </select>
+    </div>
+    <div class="f"><label>Reporting audience</label>
+      <select id="raud">
+        <option value="internal">Internal team only</option>
+        <option value="funder">Funders or partners</option>
+        <option value="both">Both internal and external</option>
+        <option value="public">Public-facing report</option>
+      </select>
+    </div>
+    <div class="f"><label>Any specific success metric? <span class="ln">optional</span></label>
+      <input id="custom" placeholder="e.g. 10,000 hashtag posts, 500 survey responses"/></div>
+    <button class="genbtn" onclick="gen()">Generate M&amp;E framework</button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="out-col" id="out-col">
+    <div class="empty" id="empty">
+      <p>Fill in your campaign details on the left.<br/>Your complete M&amp;E framework will build here.</p>
+    </div>
+    <div id="output" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>p.classList.toggle('on')));
+
+const OBJ={
+  awareness:{
+    label:'Brand and Issue Awareness',
+    kpis:[
+      ['Total reach','Total unique people exposed to campaign content','Platform analytics, social listening tool','Set baseline, target 20-30% increase'],
+      ['Impressions','Total times content was displayed across all platforms','Platform analytics','Varies by audience size'],
+      ['Hashtag reach and volume','Number of unique accounts using or seeing the campaign hashtag','Keyhole or native analytics','Track weekly'],
+      ['Earned media mentions','Coverage in press, blogs, or by creators not paid to post','Keyhole, Google Alerts','Track all mentions'],
+      ['Share of voice','Brand mentions as a % of total category conversation','Keyhole or Mention','Baseline first, then track change'],
+      ['Follower growth rate','New followers during campaign period vs. pre-campaign baseline','Platform analytics','Compare to your 30-day pre-campaign average'],
+    ],
+    survey:['How familiar are you with [Brand/Campaign]? (1 to 5 scale)','Where did you first hear about [Campaign]?','How would you describe [Campaign] in your own words?','Would you tell a friend about [Campaign]?','How likely are you to take action based on [Campaign]? (1 to 5 scale)'],
+    risks:[
+      ['high','Low organic reach due to algorithm changes','Build a mix of organic and paid distribution from the start. Do not rely on a single platform.'],
+      ['med','Hashtag tracking tool misses data due to rate limits or payment issues','Set up tracking in at least two tools. Export raw data weekly rather than relying on a final export.'],
+      ['med','Key influencer or creator does not post as agreed','Confirm deliverables in writing. Build a buffer week for late posts.'],
+      ['low','Campaign message misunderstood by audience','Pre-test core messaging with a small audience segment before full launch.'],
+    ]
+  },
+  engagement:{
+    label:'Community Engagement',
+    kpis:[
+      ['Engagement rate','Likes, comments, shares, saves divided by reach','Platform analytics','Instagram average in Nigeria: 1.5–3%. Above 3% is strong.'],
+      ['Total engagements','Sum of all interactions across all posts','Platform analytics','Track by post type to find what works'],
+      ['Comment quality','Proportion of meaningful vs one-word comments','Manual or Keyhole sentiment analysis','Aim for 60%+ meaningful comments'],
+      ['Hashtag participation','Number of posts using campaign hashtag','Keyhole','Set a participation target before launch'],
+      ['Saves and shares','Saves and shares as a % of reach','Platform analytics','Saves and shares indicate high-intent engagement'],
+      ['User-generated content volume','Organic posts from audience participating in campaign','Keyhole, manual tracking','Track separately from influencer posts'],
+    ],
+    survey:['How did you find out about [Campaign]?','Did you post or share anything related to [Campaign]?','What made you decide to engage with this campaign?','On a scale of 1 to 5, how relevant did you find this campaign to your life?','What would have made you engage more?'],
+    risks:[
+      ['high','Campaign content does not spark conversation','Plan response strategy for first 48 hours. Have team actively reply to and amplify early comments.'],
+      ['med','Engagement concentrated on one or two posts only','Spread campaign across multiple content formats: video, polls, quotes, challenges.'],
+      ['med','Negative or off-topic conversation hijacks hashtag','Monitor hashtag daily. Have a moderation plan ready.'],
+      ['low','Engagement vanishes after first week','Schedule engagement-driving content for weeks 2 and 3 specifically. Do not front-load everything.'],
+    ]
+  },
+  mindset:{
+    label:'Mindset and Behaviour Change',
+    kpis:[
+      ['Pre vs post survey scores','Change in audience attitudes measured through structured surveys','Pre-campaign and post-campaign survey (same questions)','Goal is measurable shift, not a specific number'],
+      ['Survey response rate','Number of completed surveys as a % of total reached','Survey platform (Typeform, Google Forms)','Aim for minimum 300 responses for significance'],
+      ['Sentiment shift','Change in positive vs negative sentiment in comments and responses','Keyhole sentiment analysis, manual review','Track weekly, compare to baseline'],
+      ['Qualitative insight quality','Depth and themes in open-ended survey responses','Manual analysis, thematic coding','Document top 5 themes per question'],
+      ['Participation in campaign prompts','Responses to polls, quizzes, and fill-in-the-blank posts','Native platform analytics','Track per prompt, not just total'],
+      ['Repeat engagement','People who engaged more than once across the campaign period','Platform analytics (where available)','Indicates genuine interest, not passive exposure'],
+    ],
+    survey:['Before this campaign, how would you describe your views on [Topic]? (1 to 5 scale)','After engaging with this campaign, have your views changed?','Which part of this campaign had the most impact on you?','Would you take action based on what you have learned? (Yes / No / Maybe)','In your own words, what is the most important message from this campaign?','What would you do differently because of this campaign?'],
+    risks:[
+      ['high','Pre-campaign survey not deployed before launch, making before/after comparison impossible','Deploy pre-campaign survey at least 2 weeks before launch. This is non-negotiable for mindset change measurement.'],
+      ['high','Survey responses are too few to draw conclusions','Promote the survey actively as part of the campaign, not as a separate afterthought.'],
+      ['med','Audience gives socially desirable answers rather than honest ones','Use indirect questions. Ask about "people you know" rather than direct personal views.'],
+      ['low','Post-campaign survey deployed too late (more than 2 weeks after end)','Deploy post-campaign survey within 5 days of campaign end while memory is fresh.'],
+    ]
+  },
+  conversion:{
+    label:'Conversions and Sign-ups',
+    kpis:[
+      ['Conversion rate','Sign-ups or completions as a % of traffic from campaign','GA4 or platform analytics with UTM tracking','Benchmark varies by action — sign-up forms typically 2-5%'],
+      ['Total conversions','Raw number of completed sign-ups, downloads, or purchases','GA4 goals, CRM records','Set a target before launch'],
+      ['Click-through rate (CTR)','Clicks on campaign links as a % of impressions','Platform analytics + UTM in GA4','Instagram: 0.5-1% is standard. Above 1.5% is strong.'],
+      ['Cost per conversion (if paid)','Total spend divided by total conversions','Ad platform + spreadsheet','Calculate weekly and adjust budget allocation'],
+      ['Traffic source breakdown','Which platforms and posts drove the most conversions','GA4 source/medium + UTM parameters','Build UTM links for every campaign URL'],
+      ['Funnel drop-off points','Where in the conversion flow people abandon','GA4 funnel exploration report','Identify the single biggest drop-off and fix it first'],
+    ],
+    survey:['How did you hear about [Campaign or Offer]?','What made you decide to sign up or take action?','Was there anything that almost stopped you from completing the action?','On a scale of 1 to 5, how easy was the sign-up process?','What else would you want to know before signing up?'],
+    risks:[
+      ['high','UTM parameters not set up on all links, making source attribution impossible','Build a UTM tracking spreadsheet before launch. Tag every single URL. Test links before going live.'],
+      ['high','Landing page is slow or broken on mobile','Test on 3 different mobile devices before launch. Page load above 3 seconds kills conversions.'],
+      ['med','Campaign drives traffic but landing page copy does not match campaign message','Brief the website team alongside the campaign team. Landing page and ad creative must align.'],
+      ['low','Conversion spike from campaign then sharp drop, making ROI unclear','Plan a 30-day post-campaign tracking window. Campaign value often shows up in delayed conversions.'],
+    ]
+  },
+  advocacy:{
+    label:'Advocacy and Fundraising',
+    kpis:[
+      ['Total sign-ups or pledges','Number of completed advocacy actions','CRM, sign-up form, or campaign platform','Set target before launch based on audience size'],
+      ['Peer-to-peer referral rate','Sign-ups that came through sharing by existing supporters','UTM tracking on share buttons','Referral rate above 15% indicates strong advocacy movement'],
+      ['Donation or pledge volume (if applicable)','Total financial value of donations or pledges','Fundraising platform','Track weekly against target'],
+      ['Advocate share rate','% of sign-ups who then share the campaign with others','Campaign platform analytics or referral codes','Above 10% is a healthy advocacy loop'],
+      ['Repeat action rate','Advocates who take more than one action in the campaign','CRM or campaign platform','Repeat advocates are your most valuable segment'],
+      ['Campaign amplification reach','Total reach generated by advocate shares (not just owned content)','Keyhole, campaign platform','This is your organic amplification multiplier'],
+    ],
+    survey:['What motivated you to support this campaign?','How many people did you share this campaign with?','What would make you do more for this cause?','On a scale of 1 to 5, how much do you believe this campaign will lead to real change?','What do you wish more people understood about this issue?'],
+    risks:[
+      ['high','Advocates sign up but do not share — campaign stays contained to existing audience','Build sharing prompts into the sign-up confirmation flow. Make sharing the default next step.'],
+      ['med','Donor or pledger drop-off if payment process is complex','Test the full donation flow on mobile. Reduce clicks to minimum. Offer multiple payment options.'],
+      ['med','Campaign messaging is too abstract to motivate action','Ground asks in specific, tangible outcomes. "Your pledge will fund X" converts better than general impact statements.'],
+      ['low','Campaign fatigue if launch week is too intense','Space campaign moments across the duration. Plan a mid-campaign re-activation moment for those who engaged early.'],
+    ]
+  },
+  launch:{
+    label:'Product or Service Launch',
+    kpis:[
+      ['Launch day awareness reach','Total unique reach on day 1 and week 1 of launch','Platform analytics','Set a launch day reach target and monitor hourly'],
+      ['Product page or landing page traffic','Website visits to product page from campaign','GA4 with UTM tracking','Compare to pre-launch baseline'],
+      ['Sign-up or waitlist conversions','Number of sign-ups, trials, or waitlist entries','GA4, CRM, or landing page tool','Track hourly on launch day, daily thereafter'],
+      ['Press and media pickups','Number of publications or creators covering the launch organically','Google Alerts, Keyhole','Track earned vs paid coverage separately'],
+      ['App downloads or product activations (if applicable)','Downloads, installs, or first-use completions','App analytics platform','Set a 7-day and 30-day target'],
+      ['Social share of voice on launch day','Brand mentions as a % of category conversation during launch','Keyhole','Benchmark against normal day to measure spike'],
+    ],
+    survey:['Where did you first hear about [Product]?','What made you decide to try or sign up?','What was your first impression of [Product]?','What feature or aspect interests you most?','Is there anything that almost stopped you from trying it?'],
+    risks:[
+      ['high','Technical issues on launch day (site down, app crashes, broken links)','Run a full technical rehearsal 48 hours before launch. Have a rollback plan. Monitor uptime on launch day.'],
+      ['high','Campaign generates awareness but no conversions due to poor landing page','Brief copy and design together. Landing page must align with campaign message and have a single clear CTA.'],
+      ['med','Launch overshadowed by competing news or a competitor launch','Build a contingency activation plan. Have 2 to 3 backup moments planned for the week after if launch day is disrupted.'],
+      ['low','Media outreach produces no coverage','Send press kit 48 hours before embargo. Follow up personally with top-tier contacts on launch morning.'],
+    ]
+  },
+  health:{
+    label:'Public Health Awareness',
+    kpis:[
+      ['Campaign reach','Total unique people exposed to health messaging','Platform analytics, social listening (Mentionlytics, Keyhole)','Set reach target based on audience size and budget'],
+      ['Hashtag engagement and mentions','Volume and spread of campaign hashtag','Keyhole, Mentionlytics','Track 1530+ hashtag mentions as in StopHPVForHer'],
+      ['Content views and completion rate','Video views and % of video watched to completion','Platform analytics (YouTube, Instagram, TikTok)','Above 30% video completion indicates strong message resonance'],
+      ['Action completions','Bookings, screenings, downloads, or health resource requests','Campaign landing page, health provider reports','The most important metric — actual health behaviour change'],
+      ['Media and partner pickups','Press coverage and partnership activation','Google News, manual tracking','Track separately for media vs civil society partners'],
+      ['Knowledge shift (if surveyed)','Change in correct answers to health knowledge questions pre vs post','Pre/post-campaign survey','Use the same quiz-style questions before and after'],
+    ],
+    survey:['Before this campaign, how much did you know about [Health Issue]? (1 to 5 scale)','After this campaign, do you feel more informed? (Yes / Somewhat / No)','Has this campaign made you more likely to seek a screening or vaccination?','Where would you go to find out more about [Health Issue]?','Would you share this campaign with someone you care about? (Yes / No / Maybe)'],
+    risks:[
+      ['high','Medical misinformation spreading alongside campaign content','Have all health claims reviewed by a qualified health professional before publishing. Include official health body references.'],
+      ['high','Campaign creates anxiety without providing actionable next steps','Every piece of content must include a clear action: where to screen, where to vaccinate, who to call.'],
+      ['med','Stigma prevents audience from engaging openly','Design content that normalises the conversation. Use storytelling and relatable voices rather than clinical language.'],
+      ['med','Social listening misses mentions due to local language or spelling variations','Track multiple keyword variants. Include common alternate spellings and local language terms.'],
+    ]
+  }
+};
+
+const CADENCE={
+  '2':[
+    ['Pre-launch','Set up tracking tools, deploy pre-campaign survey (if applicable), build reporting template, establish baseline metrics'],
+    ['Days 1 to 3','Monitor daily reach and engagement. Check hashtag tracking is capturing data. Flag any technical issues immediately.'],
+    ['Days 4 to 7','Mid-week performance check. Compare engagement rate to baseline. Note which content is performing above average.'],
+    ['Post-campaign (within 5 days)','Export all platform data. Deploy post-campaign survey. Write performance summary and learnings.'],
+  ],
+  '4':[
+    ['Pre-launch (1 week before)','Set up tracking, deploy pre-campaign survey, build reporting dashboard, align KPI definitions with all stakeholders'],
+    ['Week 1','Daily monitoring. Post first weekly snapshot. Note standout content and early audience response.'],
+    ['Week 2','Mid-campaign review. Compare actual vs target metrics. Adjust content mix if one format is over- or under-performing.'],
+    ['Week 3','Continue weekly snapshot. Begin drafting post-campaign report structure.'],
+    ['Week 4 plus post-campaign','Final week monitoring. Deploy post-campaign survey within 48 hours of end. Publish full report within 7 days.'],
+  ],
+  '8':[
+    ['Pre-launch','Baseline tracking, survey setup, reporting template, stakeholder KPI alignment'],
+    ['Weeks 1 to 2','Weekly snapshots. Monitor hashtag daily. Identify top-performing content early.'],
+    ['Weeks 3 to 4','Mid-campaign review report. Share with internal and external stakeholders. Adjust strategy based on data.'],
+    ['Weeks 5 to 6','Continue weekly snapshots. Begin identifying narrative themes for final report.'],
+    ['Weeks 7 to 8','Final push monitoring. Deploy post-campaign survey. Prepare final report.'],
+    ['Post-campaign','Full report delivery within 10 days. Include before/after comparisons and strategic recommendations.'],
+  ],
+  '16':[
+    ['Pre-launch','Full baseline audit, survey setup, multi-platform tracking configuration, stakeholder alignment, reporting calendar'],
+    ['Month 1','Weekly snapshots plus monthly summary report. Mid-month check-in with key stakeholders.'],
+    ['Month 2','Monthly report. Identify content that is sustaining well vs. declining. Mid-campaign strategy review.'],
+    ['Month 3','Monthly report plus comprehensive mid-campaign review. Adjust budget allocation and content strategy based on 2-month data.'],
+    ['Month 4 to 5','Continue monthly reporting. Document case studies and qualitative wins.'],
+    ['Month 6 plus post-campaign','Final push monitoring. Deploy post-campaign survey. 90-day analysis window. Full report with longitudinal data.'],
+  ]
+};
+
+const TOOLS_ALL=[
+  {name:'Keyhole',use:'Hashtag tracking, social listening, sentiment',cost:'From $79/mo',budget:['small','mid','large'],note:'Best for hashtag-specific campaigns. Export data weekly.'},
+  {name:'Google Analytics 4',use:'Website traffic, conversions, source attribution',cost:'Free',budget:['zero','small','mid','large'],note:'Essential if your campaign drives to a website. Set up UTM parameters on all links.'},
+  {name:'Google Forms',use:'Pre and post-campaign surveys',cost:'Free',budget:['zero','small','mid','large'],note:'Simple and reliable. Responses feed directly to Google Sheets for analysis.'},
+  {name:'Typeform',use:'Surveys with higher completion rates',cost:'Free tier available',budget:['zero','small','mid','large'],note:'Better user experience than Google Forms. Free tier allows up to 10 questions.'},
+  {name:'Native Platform Analytics',use:'Reach, impressions, engagement per post',cost:'Free',budget:['zero','small','mid','large'],note:'Always use natively first. Instagram Insights, TikTok Analytics, Meta Business Suite.'},
+  {name:'Meta Business Suite',use:'Facebook and Instagram performance, paid campaign data',cost:'Free',budget:['zero','small','mid','large'],note:'Essential for any campaign running on Facebook or Instagram. Includes audience insights.'},
+  {name:'Looker Studio',use:'Dashboard creation, reporting visualisation',cost:'Free',budget:['zero','small','mid','large'],note:'Connect to GA4, Google Sheets, and other sources. Ideal for stakeholder-facing dashboards.'},
+  {name:'Mentionlytics',use:'Brand monitoring, media mentions, sentiment',cost:'From $41/mo',budget:['small','mid','large'],note:'Strong for tracking press coverage alongside social mentions. More affordable than Brandwatch.'},
+  {name:'NOIPolls',use:'Independent polling and survey fieldwork in Nigeria',cost:'Contact for pricing',budget:['mid','large'],note:'Adds credibility to survey findings, especially for funder-facing reports. Ideal for mindset change campaigns.'},
+  {name:'Sprout Social',use:'Social scheduling, reporting, team management',cost:'From $199/mo',budget:['large'],note:'Overkill for smaller campaigns. Worth it for large multi-platform campaigns with a dedicated team.'},
+  {name:'Google Alerts',use:'Press and web mention tracking',cost:'Free',budget:['zero','small','mid','large'],note:'Set up alerts for brand name, campaign hashtag, and key campaign terms. Catches press pickups quickly.'},
+];
+
+const BENCH={
+  Instagram:{er:'1.5 to 3% is average in Nigeria. Above 3% is strong. Above 5% is excellent.',reach:'Organic reach is typically 10 to 20% of followers per post without boosting.',saves:'Saves above 0.5% of reach indicate highly resonant content.',video:'Reels outperform static posts for reach by 2 to 3x on average.'},
+  'Twitter/X':{er:'0.5 to 1% is typical. Above 2% is strong.',reach:'Hashtag reach is harder to predict. A well-timed tweet from a large account can 10x a campaign overnight.',rt:'Retweet rate above 1% of impressions indicates content worth amplifying.'},
+  TikTok:{er:'5 to 10% is average. TikTok has significantly higher engagement rates than other platforms.',reach:'Algorithm-driven. A single strong video can reach far beyond your follower base.', completion:'30%+ video completion rate is a strong signal. Over 50% is excellent for a campaign video.'},
+  Facebook:{er:'0.5 to 1% organic. Facebook organic reach is significantly lower than Instagram.',reach:'Facebook Groups outperform Pages for organic reach on community-focused campaigns.'},
+  YouTube:{views:'10% of subscribers viewing a video within 48 hours of upload is a strong benchmark.',retention:'50%+ average view duration is good for campaign videos over 2 minutes.',ctr:'Click-through rate on thumbnails: 4 to 10% is typical.'},
+  WhatsApp:{spread:'Hard to track directly. Use unique links or codes in WhatsApp messages to trace spread.',groups:'Campaign content forwarded to WhatsApp groups can generate offline conversations that never show in analytics.'},
+  LinkedIn:{er:'2 to 5% is strong. LinkedIn has naturally higher engagement for professional content.',reach:'Articles and long-form posts outperform links. Native video performs well.'},
+  Website:{bounce:'Below 50% bounce rate is good. Below 40% is excellent for campaign landing pages.',time:'Average time on page above 2 minutes indicates genuine content engagement.',conversion:'Sign-up form conversion rate: 2 to 5% of page visitors is typical.'},
+};
+
+const REPORTS={
+  internal:['Weekly performance snapshot (2 to 3 slides)','Mid-campaign review (5 to 7 slides with recommendations)','Post-campaign full report (10 to 15 slides)'],
+  funder:['Pre-campaign baseline report establishing measurement approach','Mid-campaign update (impact to date against KPIs)','Post-campaign full impact report with learnings (for grant compliance)'],
+  both:['Weekly internal snapshots','External mid-campaign update for partners','Post-campaign full report (two versions: detailed internal, executive summary for funders)'],
+  public:['Public-facing campaign highlight (key numbers and stories)','Social media results graphic for sharing','Post-campaign press release with headline metrics'],
+};
+
+function gen(){
+  const cn=document.getElementById('cn').value.trim()||'Your Campaign';
+  const org=document.getElementById('org').value.trim()||'Your Organisation';
+  const obj=document.getElementById('obj').value;
+  const aud=document.getElementById('aud').value.trim()||'your target audience';
+  const dur=document.getElementById('dur').value;
+  const budget=document.getElementById('budget').value;
+  const plats=[...document.querySelectorAll('#plats .pill.on')].map(p=>p.dataset.v);
+  const hasSurvey=document.getElementById('survey').value==='yes';
+  const raud=document.getElementById('raud').value;
+  const custom=document.getElementById('custom').value.trim();
+  const data=OBJ[obj];
+  const cad=CADENCE[dur];
+
+  const durLabel={'2':'1 to 2 weeks','4':'3 to 4 weeks','8':'1 to 2 months','16':'3 to 6 months'}[dur];
+  const raudLabel={internal:'Internal team',funder:'Funders and partners',both:'Internal and external stakeholders',public:'Public'}[raud];
+
+  let tools=TOOLS_ALL.filter(t=>t.budget.includes(budget));
+  if(!plats.includes('Website')) tools=tools.filter(t=>t.name!=='Google Analytics 4');
+  const relevantBench=BENCH;
+  const repItems=REPORTS[raud];
+
+  let html=`<div class="out-head">
+    <div><div class="out-title">${cn}</div><div class="out-sub">${org} · ${data.label} · ${durLabel}</div></div>
+    <button class="export-btn" onclick="exportDoc()">Export as text</button>
+  </div>`;
+
+  // Overview
+  html+=`<div class="os"><div class="os-title">Campaign overview</div>
+    <table class="kpi-table"><tr><th>Field</th><th>Details</th></tr>
+    <tr><td>Campaign name</td><td>${cn}</td></tr>
+    <tr><td>Organisation</td><td>${org}</td></tr>
+    <tr><td>Objective</td><td>${data.label}</td></tr>
+    <tr><td>Audience</td><td>${aud}</td></tr>
+    <tr><td>Platforms</td><td>${plats.join(', ')||'Not specified'}</td></tr>
+    <tr><td>Duration</td><td>${durLabel}</td></tr>
+    <tr><td>Reporting to</td><td>${raudLabel}</td></tr>
+    ${custom?`<tr><td>Success target</td><td>${custom}</td></tr>`:''}
+    </table>
+  </div>`;
+
+  // KPI table
+  html+=`<div class="os"><div class="os-title">KPI framework</div>
+    <table class="kpi-table">
+    <tr><th>KPI</th><th>What it measures</th><th>Data source</th><th>Benchmark or target</th></tr>
+    ${data.kpis.map(k=>`<tr><td>${k[0]}</td><td>${k[1]}</td><td>${k[2]}</td><td>${k[3]}</td></tr>`).join('')}
+    </table>
+  </div>`;
+
+  // Survey questions
+  if(hasSurvey){
+    html+=`<div class="os"><div class="os-title">Survey question bank</div>
+      <p style="font-size:0.82rem;color:rgba(240,237,230,0.55);margin-bottom:14px;font-weight:300;">Use these as your pre-campaign survey. Ask the same questions again post-campaign to measure change. Highlighted questions are most important for your objective.</p>
+      ${data.survey.map((q,i)=>`<div class="sq-item"><div class="sq-q">${i+1}. ${q}</div><div class="sq-meta">${i<2?'Priority question':'Supporting question'} · ${q.includes('scale')||q.includes('1 to 5')?'Likert scale':'Open or closed'}</div></div>`).join('')}
+      <div class="sq-item" style="border-color:rgba(184,245,66,0.2);">
+        <div class="sq-q">${data.survey.length+1}. How did you hear about ${cn}?</div>
+        <div class="sq-meta">Attribution question · Multiple choice</div>
+      </div>
+    </div>`;
+  }
+
+  // Timeline
+  html+=`<div class="os"><div class="os-title">Monitoring timeline</div>
+    <div class="tl">
+    ${cad.map(([w,tasks])=>`<div class="tl-row">
+      <div class="tl-week">${w}</div>
+      <div class="tl-tasks">${tasks.split('. ').filter(Boolean).map(t=>`<div class="tl-task">${t}</div>`).join('')}</div>
+    </div>`).join('')}
+    </div>
+  </div>`;
+
+  // Platform benchmarks
+  const relevantPlats=plats.filter(p=>BENCH[p]);
+  if(relevantPlats.length){
+    html+=`<div class="os"><div class="os-title">Platform benchmarks</div>
+      <p style="font-size:0.82rem;color:rgba(240,237,230,0.55);margin-bottom:14px;font-weight:300;">Use these as reference points when interpreting your results. Nigerian and West African audience benchmarks where available.</p>
+      <div class="bench-grid">
+      ${relevantPlats.map(p=>{
+        const b=BENCH[p];
+        return `<div class="bench"><div class="bench-plat">${p}</div>${Object.values(b).map(v=>`<div class="bench-item">${v}</div>`).join('')}</div>`;
+      }).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Tools
+  html+=`<div class="os"><div class="os-title">Recommended tools</div>
+    ${tools.map(t=>`<div class="tool-row">
+      <div class="tool-name">${t.name}</div>
+      <div class="tool-detail"><strong style="color:var(--white);font-weight:500;">${t.use}</strong><br/>${t.note}</div>
+      <div class="tool-cost">${t.cost}</div>
+    </div>`).join('')}
+  </div>`;
+
+  // Reporting plan
+  html+=`<div class="os"><div class="os-title">Reporting plan</div>
+    <div class="cl">${repItems.map(r=>`<div class="ci"><div class="cbox"></div>${r}</div>`).join('')}</div>
+  </div>`;
+
+  // Risk register
+  html+=`<div class="os"><div class="os-title">Risk register</div>
+    ${data.risks.map(([sev,title,mitigation])=>`<div class="risk">
+      <div class="risk-text"><strong>${title}</strong>Mitigation: ${mitigation}</div>
+      <div class="risk-sev ${sev}">${sev==='high'?'High':sev==='med'?'Medium':'Low'}</div>
+    </div>`).join('')}
+  </div>`;
+
+  // Checklists
+  const preCl=[
+    'Define and document baseline metrics before campaign starts',
+    hasSurvey?'Deploy pre-campaign survey at least 2 weeks before launch':null,
+    'Set up hashtag and keyword tracking in Keyhole or equivalent',
+    'Build reporting template before launch — not after',
+    'Create UTM links for all campaign URLs',
+    'Align KPI definitions with all stakeholders in writing',
+    'Brief content team on what data to capture during live posting',
+    plats.includes('Website')?'Test landing page on 3 mobile devices. Check page load speed.':null,
+    raud!=='internal'?'Share reporting plan and KPI definitions with external stakeholders before launch':null,
+  ].filter(Boolean);
+  const postCl=[
+    'Export all platform analytics within 48 hours of campaign end',
+    hasSurvey?'Deploy post-campaign survey immediately (within 5 days of end)':null,
+    'Pull hashtag data from tracking tools and save raw export',
+    'Document any data gaps and explain why they occurred',
+    'Write insight summary covering what worked, what did not, and key recommendations',
+    'Produce post-campaign report in agreed format',
+    raud!=='internal'?'Prepare external summary for funders or partners':'Review internal learnings with team',
+    'Archive all raw data, exports, and reports for future reference',
+    'Schedule retrospective meeting within 2 weeks of campaign end',
+  ].filter(Boolean);
+  html+=`<div class="os"><div class="os-title">Pre-campaign checklist</div><div class="cl">${preCl.map(c=>`<div class="ci"><div class="cbox"></div>${c}</div>`).join('')}</div></div>`;
+  html+=`<div class="os"><div class="os-title">Post-campaign checklist</div><div class="cl">${postCl.map(c=>`<div class="ci"><div class="cbox"></div>${c}</div>`).join('')}</div></div>`;
+
+  document.getElementById('empty').style.display='none';
+  document.getElementById('output').style.display='block';
+  document.getElementById('output').innerHTML=html;
+  document.getElementById('out-col').scrollTop=0;
+
+  window._exportData={cn,org,obj:data.label,aud,plats,dur:durLabel,kpis:data.kpis,survey:hasSurvey?data.survey:[],cad,tools,repItems,risks:data.risks,preCl,postCl,custom};
+}
+
+function exportDoc(){
+  const d=window._exportData;
+  if(!d)return;
+  const lines=[
+    `M&E FRAMEWORK: ${d.cn}`,`Organisation: ${d.org}`,`Objective: ${d.obj}`,`Audience: ${d.aud}`,
+    `Platforms: ${d.plats.join(', ')}`,`Duration: ${d.dur}`,``,
+    `KPIs`,`----`,
+    ...d.kpis.map(k=>`${k[0]}: ${k[1]} | Source: ${k[2]} | Benchmark: ${k[3]}`),``,
+    d.survey.length?`SURVEY QUESTIONS\n${d.survey.map((q,i)=>`${i+1}. ${q}`).join('\n')}\n`:'',
+    `MONITORING TIMELINE`,`---`,
+    ...d.cad.map(([w,t])=>`${w}: ${t}`),``,
+    `RECOMMENDED TOOLS`,`---`,
+    ...d.tools.map(t=>`${t.name} (${t.cost}): ${t.use}`),``,
+    `RISK REGISTER`,`---`,
+    ...d.risks.map(([s,t,m])=>`[${s.toUpperCase()}] ${t} → ${m}`),``,
+    `PRE-CAMPAIGN CHECKLIST`,`---`,
+    ...d.preCl.map(c=>`[ ] ${c}`),``,
+    `POST-CAMPAIGN CHECKLIST`,`---`,
+    ...d.postCl.map(c=>`[ ] ${c}`),
+  ].filter(l=>l!==undefined).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([lines],{type:'text/plain'}));
+  a.download=`me-framework-${d.cn.toLowerCase().replace(/\s+/g,'-')}.txt`;
+  a.click();
+}
+</script>
+</body>
+</html>

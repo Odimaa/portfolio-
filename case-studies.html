@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Case Study: GA4 Content Dashboard — Allen Horsfall</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a0a;--bg2:#111111;--bg3:#181818;--accent:#b8f542;--accent2:#7ee832;--white:#f0ede6;--muted:#888880;--border:rgba(255,255,255,0.07);--display:'Syne',sans-serif;--body:'DM Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--white);font-family:var(--body);font-size:16px;line-height:1.6;min-height:100vh;}
+nav{padding:22px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.back-link{padding:8px 18px;border-radius:100px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-size:0.82rem;font-weight:500;transition:all 0.2s;}
+.back-link:hover{border-color:var(--accent);color:var(--accent);}
+.wrap{max-width:820px;padding:70px 48px 100px;}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;border:1px solid rgba(184,245,66,0.3);background:rgba(184,245,66,0.06);font-size:0.7rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:22px;}
+.tdot{width:6px;height:6px;background:var(--accent);border-radius:50%;}
+h1{font-family:var(--display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin-bottom:20px;}
+h1 em{font-style:normal;color:var(--accent);}
+.meta{display:flex;gap:24px;flex-wrap:wrap;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:48px;}
+.mi{display:flex;flex-direction:column;gap:3px;}
+.ml{font-size:0.68rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;}
+.mv{font-size:0.88rem;color:rgba(240,237,230,0.8);}
+.cs{margin-bottom:44px;}
+.cs h2{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.cs h2::before{content:'';width:18px;height:2px;background:var(--accent);}
+.cs p{font-size:0.93rem;color:rgba(240,237,230,0.7);line-height:1.8;font-weight:300;margin-bottom:14px;}
+.cs p strong{color:var(--white);font-weight:500;}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.b{padding:20px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;}
+.b.before{border-left:3px solid rgba(255,90,90,0.4);}
+.b.after{border-left:3px solid var(--accent);}
+.bl{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.b.after .bl{color:var(--accent);}
+.b p{font-size:0.83rem;color:rgba(240,237,230,0.6);line-height:1.65;font-weight:300;margin:0;}
+.stk{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.st{padding:5px 13px;background:rgba(184,245,66,0.06);border:1px solid rgba(184,245,66,0.2);border-radius:100px;font-size:0.76rem;color:var(--accent);font-weight:500;}
+.og{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.oc{padding:20px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;text-align:center;}
+.on{font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em;line-height:1;margin-bottom:5px;}
+.olb{font-size:0.75rem;color:var(--muted);line-height:1.4;}
+.ll{display:flex;flex-direction:column;gap:10px;}
+.li{display:flex;gap:12px;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;}
+.ln-num{font-family:var(--display);font-weight:800;color:var(--accent);font-size:0.95rem;flex-shrink:0;}
+.ln-text{font-size:0.84rem;color:rgba(240,237,230,0.65);line-height:1.65;font-weight:300;}
+@media(max-width:700px){.wrap{padding:40px 24px 80px;}nav{padding:18px 24px;}.bg,.og{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">AH<span>.</span></a>
+  <a class="back-link" href="index.html">← Portfolio</a>
+</nav>
+<div class="wrap">
+  <div class="tag"><span class="tdot"></span>Case Study</div>
+  <h1>Building a <em>content analytics</em><br>dashboard for editorial decisions</h1>
+  <div class="meta">
+    <div class="mi"><div class="ml">Organisation</div><div class="mv">BellaNaija</div></div>
+    <div class="mi"><div class="ml">Role</div><div class="mv">Solo build</div></div>
+    <div class="mi"><div class="ml">Year</div><div class="mv">2026</div></div>
+    <div class="mi"><div class="ml">Type</div><div class="mv">Internal analytics tooling</div></div>
+  </div>
+
+  <div class="cs">
+    <h2>The problem</h2>
+    <div class="bg">
+      <div class="b before"><div class="bl">Before</div><p>The editorial team published Features content regularly but had no easy way to see how individual pieces were performing in terms of traffic. GA4 existed but required manual querying every time anyone wanted an answer. Nobody was consistently monitoring whether content was being read, shared, or had gone completely stale.</p></div>
+      <div class="b after"><div class="bl">What was needed</div><p>A single view that automatically matched published content from WordPress against its GA4 traffic data, surfaced pieces that had received zero views, flagged evergreen content worth re-promoting, and was fast enough to check in under five minutes.</p></div>
+    </div>
+    <p>The deeper issue was that editorial decisions were being made on instinct rather than data. Good content was being left to go stale while the team kept producing new pieces without knowing what was actually landing. The tool needed to change that default behaviour, not just answer occasional one-off questions.</p>
+  </div>
+
+  <div class="cs">
+    <h2>What I built</h2>
+    <p>An internal Google Apps Script web application deployed at <strong>go.bellanaija.co/featuretracker</strong>. The app pulls live content data from the WordPress REST API, matches each published post against its GA4 performance metrics via the GA4 Data API, and presents everything in a searchable, filterable dashboard.</p>
+    <p>Key features: <strong>summary cards</strong> giving an at-a-glance view of overall content performance, <strong>trend charts</strong> showing traffic over time, <strong>zero-view alerts</strong> flagging content that has received no traffic at all, <strong>evergreen alerts</strong> identifying older high-performing content worth pushing again, a search and pagination layer for navigating the full content archive, and <strong>CSV export</strong> for when someone needs to analyse the data offline.</p>
+    <p>One technical constraint worth noting: GA4's Data API has a row limit per call. Pulling all traffic data and filtering afterwards would either miss content or hit rate limits. The solution was a custom <strong>inListFilter approach</strong> — querying specific post URLs directly rather than pulling everything — which keeps response times fast and stays within API limits even with a large content archive.</p>
+    <div class="stk">
+      <span class="st">Google Apps Script</span>
+      <span class="st">GA4 Data API</span>
+      <span class="st">WordPress REST API</span>
+      <span class="st">JavaScript</span>
+      <span class="st">HTML / CSS</span>
+    </div>
+  </div>
+
+  <div class="cs">
+    <h2>Outcome</h2>
+    <div class="og">
+      <div class="oc"><div class="on">60%</div><div class="olb">Reduction in manual reporting time for the team</div></div>
+      <div class="oc"><div class="on">Live</div><div class="olb">Data refreshed from WordPress and GA4 on each load</div></div>
+      <div class="oc"><div class="on">2</div><div class="olb">Automated alert types that catch issues without anyone asking</div></div>
+    </div>
+    <p style="margin-top:18px;">The team went from manually querying GA4 and cross-referencing with the CMS to having a single view that answered the most common editorial questions in one load. The zero-view alert was the feature that got used most consistently — it surfaced content that had been published and forgotten, prompting re-promotion decisions that would not have happened otherwise.</p>
+  </div>
+
+  <div class="cs">
+    <h2>What I learned</h2>
+    <div class="ll">
+      <div class="li"><span class="ln-num">01</span><span class="ln-text">Dashboards fail when nobody has a reason to open them. The automated alerts built a habit loop — the tool created its own reason to be checked. Passive monitoring is more sustainable than expecting people to remember to open a dashboard proactively.</span></div>
+      <div class="li"><span class="ln-num">02</span><span class="ln-text">GA4's API has real constraints that only become visible at production scale. Testing with a small dataset gave a false sense of how the tool would behave against a full content archive. The inListFilter approach was a solution that came from hitting that wall in a real deployment, not a sandbox.</span></div>
+      <div class="li"><span class="ln-num">03</span><span class="ln-text">The most valuable feature was not the one I expected. I built the trend charts thinking they would be the main draw. The zero-view alert — which I added almost as an afterthought — turned out to be what people actually used and talked about. The lesson: the feature that shows people something they did not already know will always beat the feature that presents data they could have found themselves.</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
