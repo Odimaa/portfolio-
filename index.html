@@ -5,10 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Allen Horsfall</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
+@font-face{font-family:"Syne";font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/syne-v24-latin-regular.woff2") format("woff2");}
+@font-face{font-family:"Syne";font-style:normal;font-weight:500;font-display:swap;src:url("./fonts/syne-v24-latin-500.woff2") format("woff2");}
+@font-face{font-family:"Syne";font-style:normal;font-weight:600;font-display:swap;src:url("./fonts/syne-v24-latin-600.woff2") format("woff2");}
+@font-face{font-family:"Syne";font-style:normal;font-weight:700;font-display:swap;src:url("./fonts/syne-v24-latin-700.woff2") format("woff2");}
+@font-face{font-family:"Syne";font-style:normal;font-weight:800;font-display:swap;src:url("./fonts/syne-v24-latin-800.woff2") format("woff2");}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:300;font-display:swap;src:url("./fonts/dm-sans-v17-latin-300.woff2") format("woff2");}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/dm-sans-v17-latin-regular.woff2") format("woff2");}
+@font-face{font-family:"DM Sans";font-style:normal;font-weight:500;font-display:swap;src:url("./fonts/dm-sans-v17-latin-500.woff2") format("woff2");}
+
   :root {
     --bg:        #0a0a0a;
     --bg2:       #111111;
@@ -959,15 +965,15 @@
 
     <div class="project-card featured reveal">
       <div>
-        <div class="project-tag">Case Studies</div>
-        <h3 class="project-title">Internal Builds at BellaNaija</h3>
-        <p class="project-desc">Two case studies covering an Ads CRM built from scratch in Next.js and a GA4 content analytics dashboard. What the problem was, what I built, what changed.</p>
+        <div class="project-tag">Case Study</div>
+        <h3 class="project-title">GA4 Content Analytics Dashboard</h3>
+        <p class="project-desc">Built an internal dashboard at BellaNaija integrating WordPress and GA4 data. What the problem was, how I solved it, and what changed for the team. A better version lives internally at BellaNaija — this is the public write-up.</p>
         <div class="project-metrics">
-          <div class="metric">CRM <span>699 accounts migrated</span></div>
-          <div class="metric">Dashboard <span>60% less manual reporting</span></div>
+          <div class="metric">60% <span>less manual reporting</span></div>
+          <div class="metric">Live <span>data on every load</span></div>
         </div>
         <div style="margin-top:16px;">
-          <a href="case-studies.html" style="padding:8px 18px;border-radius:100px;border:1px solid rgba(184,245,66,0.3);background:rgba(184,245,66,0.06);color:var(--accent);font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.2s;">Read case studies</a>
+          <a href="case-studies.html" style="padding:8px 18px;border-radius:100px;border:1px solid rgba(184,245,66,0.3);background:rgba(184,245,66,0.06);color:var(--accent);font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.2s;">Read case study</a>
         </div>
       </div>
       <div class="project-arrow">↗</div>
@@ -1062,11 +1068,11 @@
     <h2 class="section-heading">Want the full<br>picture? <em>Download my CV.</em></h2>
     <p class="section-sub" style="margin:0 auto 40px;">Four years across client service, campaign analytics, CRM systems, internal tooling, and insights at BellaNaija, plus consulting and research work.</p>
     <!-- Replace the href below with your actual CV link e.g. a Google Drive or Dropbox URL -->
-    <a href="#cv-placeholder" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;font-size:0.9rem;">
+    <a href="Allen_Horsfall_Odimaa.pdf" download class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;font-size:0.9rem;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download CV
     </a>
-    <p style="margin-top:16px;font-size:0.75rem;color:var(--muted);"><!-- REPLACE #cv-placeholder with your CV link --></p>
+
   </div>
 </section>
 
