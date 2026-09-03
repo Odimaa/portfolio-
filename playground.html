@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allen — Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..900&family=Shantell+Sans:wght@400;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">🙂</div>
+    <div class="nav-collapsible" id="navCollapsible">
+      <a class="nav-link" href="index.html">★ HOME</a>
+      <a class="nav-link" href="about.html">👤 ABOUT</a>
+      <a class="nav-link" href="services.html">▦ SERVICES</a>
+      <a class="nav-link active" href="playground.html">◆ PLAYGROUND</a>
+      <div class="nav-spacer"></div>
+      <a class="contact-btn" href="contact.html">♡ CONTACT</a>
+    </div>
+    <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <div class="pg-page">
+    <div class="pg-intro">
+      <div class="pg-label">playground<span class="ul"></span></div>
+      <div class="pg-heading-wrap">
+        <h1 class="pg-heading">JUST FOR FUN</h1>
+        <div class="pg-float-tag">tap a photo</div>
+      </div>
+      <p class="pg-intro-sub">A corkboard of the stuff that has nothing to do with dashboards. Flip a photo, there's usually a story on the back.</p>
+      <div class="pg-progress" id="pgProgress">
+        <span id="pgProgressCount">0</span> / <span id="pgProgressTotal">7</span> flipped
+      </div>
+    </div>
+
+    <div class="pg-board reveal-group">
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note gold">Born a Red, Bred a Red, Red till I Die</div>
+              <img class="pg-photo" src="images/playground/man-utd.jpg" alt="Manchester United">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">still not over 2013.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note lav">my favorite</div>
+              <img class="pg-photo" src="images/playground/uncharted.jpg" alt="Uncharted 4">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">played it three times just for the ending.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note mint">the backlog</div>
+              <img class="pg-photo" src="images/playground/football-manager.jpg" alt="Football Manager 2024">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">three saves deep and lying about it.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note gold">one more save</div>
+              <img class="pg-photo" src="images/playground/detroit.jpg" alt="Detroit: Become Human">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">still think about the choice I got wrong.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note lav">always rewatching</div>
+              <img class="pg-photo" src="images/playground/psych.jpg" alt="Psych">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">the pineapple's in there.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note mint">again and again</div>
+              <img class="pg-photo" src="images/playground/rick-and-morty.jpg" alt="Rick and Morty">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">the sad episodes hit different on a rewatch.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="pg-card reveal-item">
+        <button class="pg-flip" type="button" aria-label="Flip photo">
+          <div class="pg-face-inner">
+            <div class="pg-face pg-front">
+              <div class="pg-note gold">mind bender</div>
+              <img class="pg-photo" src="images/playground/inception.jpg" alt="Inception">
+              <div class="pg-flip-hint">↻</div>
+            </div>
+            <div class="pg-face pg-back">
+              <p class="pg-back-text">still spinning.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cta-talk">
+    <div class="cta-smiley reveal">🙂</div>
+    <h2 class="cta-heading reveal">LET'S TALK</h2>
+    <p class="cta-sub reveal">Got a broken process, a messy dataset, or a good problem? Send it over, I read every message.</p>
+
+    <div class="cta-stage reveal-group">
+      <div class="cta-note reveal-item">
+        <div class="tape blue tl"></div>
+        <div class="tape yellow tr"></div>
+        <div class="cta-note-name">Allen</div>
+        <p class="cta-note-text">Open to contract work, full-time roles, and interesting problems worth fixing.</p>
+      </div>
+
+      <div class="cta-panel reveal-item">
+        <p class="cta-panel-sub">let's fix something together</p>
+        <h3 class="cta-panel-title">CONTACT</h3>
+        <a class="cta-panel-link" href="contact.html">DROP A LINE ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-name">ALLEN</div>
+        <div class="footer-role"><span class="dot"></span> PRODUCT AND OPERATIONS GENERALIST</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="playground.html">PLAYGROUND</a>
+      </nav>
+      <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Allen Horsfall Odimaa</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

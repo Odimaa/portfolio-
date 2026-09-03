@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allen — Internal Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..900&family=Shantell+Sans:wght@400;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">🙂</div>
+    <div class="nav-collapsible" id="navCollapsible">
+      <a class="nav-link" href="index.html">★ HOME</a>
+      <a class="nav-link" href="about.html">👤 ABOUT</a>
+      <a class="nav-link active" href="services.html">▦ SERVICES</a>
+      <a class="nav-link" href="playground.html">◆ PLAYGROUND</a>
+      <div class="nav-spacer"></div>
+      <a class="contact-btn" href="contact.html">♡ CONTACT</a>
+    </div>
+    <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <div class="pd-page">
+
+    <div class="pd-hero reveal">
+      <div class="pd-eyebrow">✦ SERVICE 01</div>
+      <h1 class="pd-title">Internal Tools</h1>
+      <p class="pd-lead">I spot what's slowing a team down and build the tool to fix it. Dashboards, an LMS, a CRM, a link tracker, each one solving a real gap.</p>
+    </div>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag mint">LIVE TOOL</div>
+      <h2 class="pd-block-title">Ferry, my own link and QR tool</h2>
+      <p class="pd-block-copy">Built because I wanted one clean place to shorten links, generate QR codes, and see what's actually getting clicked, without paying for someone else's tool. It's live right now.</p>
+
+      <div class="pd-carousel reveal" id="ferryCarousel">
+        <button class="svc-car-arrow prev" type="button" aria-label="Previous view">‹</button>
+        <div class="svc-car-track">
+          <div class="svc-car-slide active"><img src="images/tools-page/ferry-main.jpg" alt="Ferry dashboard"><span class="svc-car-label">Dashboard</span></div>
+          <div class="svc-car-slide"><img src="images/tools-page/ferry-newlink.jpg" alt="Ferry new link modal"><span class="svc-car-label">Create a link</span></div>
+          <div class="svc-car-slide"><img src="images/tools-page/ferry-qr.jpg" alt="Ferry QR code modal"><span class="svc-car-label">QR code, on demand</span></div>
+        </div>
+        <button class="svc-car-arrow next" type="button" aria-label="Next view">›</button>
+        <div class="svc-car-dots">
+          <span class="svc-car-dot active"></span>
+          <span class="svc-car-dot"></span>
+          <span class="svc-car-dot"></span>
+        </div>
+      </div>
+      
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag gold">BEFORE AND AFTER</div>
+      <h2 class="pd-block-title">A CRM built on top of a plain spreadsheet</h2>
+      <p class="pd-block-copy">Same data, before and after. One side is a list. The other is a dashboard someone can actually run a pipeline from, with a form built right into the sidebar.</p>
+      <div class="pd-ba-grid reveal-group">
+        <div class="pd-ba-card reveal-item">
+          <div class="pd-ba-label">Before</div>
+          <img src="images/tools-page/crm-before.jpg" alt="Raw unformatted CRM spreadsheet">
+        </div>
+        <div class="pd-ba-arrow">→</div>
+        <div class="pd-ba-card reveal-item">
+          <div class="pd-ba-label accent">After</div>
+          <img src="images/tools-page/crm-after.jpg" alt="Finished sales pipeline dashboard with sidebar form">
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag pink">CONCEPT</div>
+      <h2 class="pd-block-title">Reportly, a report generator concept</h2>
+      <p class="pd-block-copy">An idea for a tool that sits on top of a reporting workflow: pick a data source, pick your metrics, pick a format, generate. Built as a design concept, not a shipped product, yet.</p>
+      <div class="pd-pipeline reveal">
+        <img src="images/tools-page/reportly.jpg" alt="Reportly report generator concept">
+      </div>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag blue">WHAT'S INCLUDED</div>
+      <h2 class="pd-block-title">What I actually build</h2>
+      <div class="pd-accordion reveal-group" id="toolsAccordion">
+        <div class="pd-acc-item reveal-item open">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">01</span>
+            <span class="pd-acc-title">Problem-First Builds</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>I don't start with the tool, I start with what's actually broken. The build follows from that.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">02</span>
+            <span class="pd-acc-title">Dashboards and Data Tools</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Internal dashboards built on Sheets, Apps Script, or a lightweight web app, whatever the job actually needs.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">03</span>
+            <span class="pd-acc-title">Automation and Scripts</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>The repetitive manual step, removed. Forms that fill sheets, sheets that trigger alerts, that kind of thing.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">04</span>
+            <span class="pd-acc-title">QA and Maintenance</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Tools break quietly if nobody's watching. I check mine before they become someone else's problem.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">05</span>
+            <span class="pd-acc-title">Documentation and Handoff</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>A tool nobody else can run without me isn't finished. I leave a simple guide behind.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag mint">HOW WE WORK TOGETHER</div>
+      <div class="pd-engage-grid reveal-group">
+        <div class="pd-engage-card reveal-item">
+          <h3>Fresh Build</h3>
+          <p>Tell me the process that's slowing you down, I design and build the tool that replaces it.</p>
+        </div>
+        <div class="pd-engage-card reveal-item">
+          <h3>Fix What's Broken</h3>
+          <p>Already have a spreadsheet or script that's outgrown itself? I clean it up and rebuild what needs rebuilding.</p>
+        </div>
+        <div class="pd-engage-card reveal-item">
+          <h3>Ongoing Support</h3>
+          <p>Tools need upkeep. I check in on a schedule so nothing quietly breaks.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <div class="cta-talk">
+    <div class="cta-smiley reveal">🙂</div>
+    <h2 class="cta-heading reveal">LET'S TALK</h2>
+    <p class="cta-sub reveal">Got a broken process, a messy dataset, or a good problem? Send it over, I read every message.</p>
+
+    <div class="cta-stage reveal-group">
+      <div class="cta-note reveal-item">
+        <div class="tape blue tl"></div>
+        <div class="tape yellow tr"></div>
+        <div class="cta-note-name">Allen</div>
+        <p class="cta-note-text">Open to contract work, full-time roles, and interesting problems worth fixing.</p>
+      </div>
+
+      <div class="cta-panel reveal-item">
+        <p class="cta-panel-sub">let's fix something together</p>
+        <h3 class="cta-panel-title">CONTACT</h3>
+        <a class="cta-panel-link" href="contact.html">DROP A LINE ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-name">ALLEN</div>
+        <div class="footer-role"><span class="dot"></span> PRODUCT AND OPERATIONS GENERALIST</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="playground.html">PLAYGROUND</a>
+      </nav>
+      <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Allen Horsfall Odimaa</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

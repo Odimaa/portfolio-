@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allen — Pitch Deck Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..900&family=Shantell+Sans:wght@400;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">🙂</div>
+    <div class="nav-collapsible" id="navCollapsible">
+      <a class="nav-link" href="index.html">★ HOME</a>
+      <a class="nav-link" href="about.html">👤 ABOUT</a>
+      <a class="nav-link active" href="services.html">▦ SERVICES</a>
+      <a class="nav-link" href="playground.html">◆ PLAYGROUND</a>
+      <div class="nav-spacer"></div>
+      <a class="contact-btn" href="contact.html">♡ CONTACT</a>
+    </div>
+    <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <div class="pd-page">
+
+    <div class="pd-hero reveal">
+      <div class="pd-eyebrow">✦ SERVICE 03</div>
+      <h1 class="pd-title">Pitch Deck Design</h1>
+      <p class="pd-lead">Decks built to get the yes, not just look nice. Structure, design, and the data story, handled end to end.</p>
+    </div>
+
+    <div class="pd-carousel reveal" id="deckCarousel">
+      <button class="svc-car-arrow prev" type="button" aria-label="Previous deck type">‹</button>
+      <div class="svc-car-track">
+        <div class="svc-car-slide active"><img src="images/services/pitch-portfolio.jpg" alt="Proof of Work Portfolio sample slide"><span class="svc-car-label">Proof of Work Portfolio</span></div>
+        <div class="svc-car-slide"><img src="images/services/pitch-b2b.jpg" alt="B2B Pitch Deck sample slide"><span class="svc-car-label">B2B Pitch Deck</span></div>
+        <div class="svc-car-slide"><img src="images/services/pitch-campaign.jpg" alt="Campaign Wrap-up Deck sample slide"><span class="svc-car-label">Campaign Wrap-up Deck</span></div>
+        <div class="svc-car-slide"><img src="images/services/pitch-hero.jpg" alt="Startup Pitch Deck sample slide"><span class="svc-car-label">Startup Pitch Deck</span></div>
+      </div>
+      <button class="svc-car-arrow next" type="button" aria-label="Next deck type">›</button>
+      <div class="svc-car-dots">
+        <span class="svc-car-dot active"></span>
+        <span class="svc-car-dot"></span>
+        <span class="svc-car-dot"></span>
+        <span class="svc-car-dot"></span>
+      </div>
+    </div>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag pink">A SPECIALIST PRACTICE</div>
+      <h2 class="pd-block-title">Pitch deck design for investor and B2B communications</h2>
+      <p class="pd-block-copy">I write and design decks for people who need to walk into a room and be taken seriously, a first pitch, a sponsor deck, a campaign wrap-up, whatever the room calls for.</p>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag gold">WHO IT'S FOR</div>
+      <div class="pd-persona-grid reveal-group">
+        <div class="pd-persona blue reveal-item">
+          <div class="tape blue tl"></div>
+          <h3>Media &amp; Entertainment Professionals</h3>
+          <p>People who've done serious work across campaigns, partnerships, and platforms, but whose career story lives in their head, not on a page.</p>
+          <div class="pd-persona-tags">
+            <span>Proof of Work Portfolios</span>
+            <span>Partnership &amp; Campaign Decks</span>
+            <span>Campaign Wrap-up Reports</span>
+          </div>
+        </div>
+        <div class="pd-persona gold reveal-item">
+          <div class="tape yellow tr"></div>
+          <h3>Executives &amp; Senior Leaders</h3>
+          <p>High-level professionals who need a document that does the introducing before they walk in.</p>
+          <div class="pd-persona-tags">
+            <span>Executive Media Kits</span>
+            <span>Speaker One-Pagers</span>
+            <span>Board &amp; Stakeholder Decks</span>
+          </div>
+        </div>
+        <div class="pd-persona pink reveal-item">
+          <div class="tape blue tl"></div>
+          <h3>Agencies &amp; Brand Teams</h3>
+          <p>Teams pitching to sponsors, or reporting back to partners once a campaign closes.</p>
+          <div class="pd-persona-tags">
+            <span>B2B Sponsorship Pitch Decks</span>
+            <span>Campaign Wrap-up Decks</span>
+            <span>Brand Partnership Proposals</span>
+          </div>
+        </div>
+        <div class="pd-persona mint reveal-item">
+          <div class="tape yellow tr"></div>
+          <h3>Freelancers &amp; Consultants</h3>
+          <p>Skilled people whose work speaks for itself, but whose documents don't, yet.</p>
+          <div class="pd-persona-tags">
+            <span>Proof of Work Portfolios</span>
+            <span>Rate Cards &amp; Service Decks</span>
+            <span>Client Proposal Templates</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-quote reveal">
+      <p>I build documents that open doors.</p>
+      <span class="pd-quote-sub">Not templates. Not Canva exports. Written and designed from scratch around the person, the project, and the room they're trying to get into.</span>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag mint">WHAT'S INCLUDED</div>
+      <h2 class="pd-block-title">Everything the document needs, in one place</h2>
+      <p class="pd-block-copy">Most people come with raw material, a career history, a campaign they ran, a pitch they need to make. I take that and handle everything it takes to turn it into something that works.</p>
+      <div class="pd-accordion reveal-group" id="featureAccordion">
+        <div class="pd-acc-item reveal-item open">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">01</span>
+            <span class="pd-acc-title">Story &amp; Narrative</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Finding the thread that connects your experience, your work, and what you want the reader to do next. This is where most documents fall apart, and where I start.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">02</span>
+            <span class="pd-acc-title">Writing &amp; Copy</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Bio, case study framing, impact language, service descriptions. Written in your voice, not mine.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">03</span>
+            <span class="pd-acc-title">Layout &amp; Design</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Clean, typographic, built to hold up in a boardroom or an inbox. No generic templates.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">04</span>
+            <span class="pd-acc-title">Data &amp; Results</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Your numbers presented so the impact is legible. Impressions, partnership counts, campaign reach, revenue, whatever you have.</p>
+          </div>
+        </div>
+        <div class="pd-acc-item reveal-item">
+          <button class="pd-acc-head" type="button">
+            <span class="pd-acc-num">05</span>
+            <span class="pd-acc-title">Visual Identity</span>
+            <span class="pd-acc-plus">+</span>
+          </button>
+          <div class="pd-acc-panel">
+            <p>Colour, type, and layout choices that feel intentional and consistent across every page. Not decoration, structure.</p>
+          </div>
+        </div>
+      </div>
+      <p class="pd-block-note">One engagement, one person handling all of it. You don't need a copywriter and a designer, then have to manage both. That's the point.</p>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag blue">PRICING</div>
+      <h2 class="pd-block-title">What people come back for</h2>
+      <div class="pd-price-grid reveal-group">
+        <div class="pd-price-card reveal-item">
+          <div class="pd-price-tab blue">01</div>
+          <div class="pd-price-body">
+            <h3>Executive Media Kit</h3>
+            <p class="pd-price-desc">You’ve done the work. This makes sure the right people can see it. A career narrative written and designed from scratch, built for the rooms you’re trying to get into.</p>
+            <div class="pd-price-tag">₦150,000 – 250,000</div>
+            <div class="pd-price-meta">3 to 5 pages · Bio, career journey, case studies · PDF and editable file</div>
+          </div>
+        </div>
+        <div class="pd-price-card reveal-item">
+          <div class="pd-price-tab gold">02</div>
+          <div class="pd-price-body">
+            <h3>Proof of Work Portfolio</h3>
+            <p class="pd-price-desc">Not a CV. Not a LinkedIn export. A document built around what you actually delivered, written and designed to show the impact, not just the job title.</p>
+            <div class="pd-price-tag">₦100,000 – 180,000</div>
+            <div class="pd-price-meta">8 to 12 slides · Case studies, impact callouts, brand logos · PDF and editable file</div>
+          </div>
+        </div>
+        <div class="pd-price-card reveal-item">
+          <div class="pd-price-tab pink">03</div>
+          <div class="pd-price-body">
+            <h3>B2B Pitch Deck</h3>
+            <p class="pd-price-desc">For when the deal matters. Structured to move someone from interested to yes, with the narrative and the numbers working together.</p>
+            <div class="pd-price-tag">₦250,000 – 400,000</div>
+            <div class="pd-price-meta">10 to 16 slides · Copy and structure included · PDF and editable file</div>
+          </div>
+        </div>
+        <div class="pd-price-card reveal-item">
+          <div class="pd-price-tab mint">04</div>
+          <div class="pd-price-body">
+            <h3>Campaign Wrap-up Deck</h3>
+            <p class="pd-price-desc">The campaign is done. Now you need to show the partner what it was worth. Clean, data-forward, and built to make your numbers land.</p>
+            <div class="pd-price-tag">₦200,000 – 400,000</div>
+            <div class="pd-price-meta">6 to 10 slides · Impact writing, brand logos, press snippets · PDF</div>
+          </div>
+        </div>
+        <div class="pd-price-card reveal-item">
+          <div class="pd-price-tab lav">05</div>
+          <div class="pd-price-body">
+            <h3>Speaker One-Pager</h3>
+            <p class="pd-price-desc">One page. Everything an organiser needs to say yes. Headshot, bio, expertise, past engagements. Done.</p>
+            <div class="pd-price-tag">₦60,000 – 90,000</div>
+            <div class="pd-price-meta">1 page · Bio written · PDF</div>
+          </div>
+        </div>
+      </div>
+      <p class="pd-block-note">Need something not on this list? Reach out and we'll figure it out.</p>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag gold">HOW WE WORK TOGETHER</div>
+      <div class="pd-engage-grid reveal-group">
+        <div class="pd-engage-card reveal-item">
+          <h3>Start from scratch</h3>
+          <p>You have the experience, the campaign history, the numbers. I handle everything else, the narrative, the writing, the layout, the final file. You walk away with something that actually represents the work you've done.</p>
+        </div>
+        <div class="pd-engage-card reveal-item">
+          <h3>Refresh what you have</h3>
+          <p>Maybe you already have a deck or a kit that's outdated, too text-heavy, or just doesn't look the part anymore. I sharpen the copy where it needs it and rebuild the design around it. Same story, told better.</p>
+        </div>
+        <div class="pd-engage-card reveal-item">
+          <h3>Fast turnaround</h3>
+          <p>Got a speaking slot confirmed for next week? A brand pitch going out Friday? Most projects turn around in 5 to 7 business days. Tight deadlines are workable, just flag it upfront.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-block reveal">
+      <div class="pd-tag pink">TOOLS</div>
+      <h2 class="pd-block-title">Whatever tool you already use</h2>
+      <div class="svc-tools-row">
+        <div class="svc-tool-badge">
+          <img src="images/tools/powerpoint.svg" alt="PowerPoint">
+          <span>PowerPoint</span>
+        </div>
+        <div class="svc-tool-badge">
+          <img src="images/tools/google-slides.svg" alt="Google Slides">
+          <span>Google Slides</span>
+        </div>
+        <div class="svc-tool-badge">
+          <img src="images/tools/canva.svg" alt="Canva">
+          <span>Canva</span>
+        </div>
+        <div class="svc-tool-badge">
+          <img src="images/tools/figma.svg" alt="Figma">
+          <span>Figma</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <div class="cta-talk">
+    <div class="cta-smiley reveal">🙂</div>
+    <h2 class="cta-heading reveal">LET'S TALK</h2>
+    <p class="cta-sub reveal">Got a broken process, a messy dataset, or a good problem? Send it over, I read every message.</p>
+
+    <div class="cta-stage reveal-group">
+      <div class="cta-note reveal-item">
+        <div class="tape blue tl"></div>
+        <div class="tape yellow tr"></div>
+        <div class="cta-note-name">Allen</div>
+        <p class="cta-note-text">Open to contract work, full-time roles, and interesting problems worth fixing.</p>
+      </div>
+
+      <div class="cta-panel reveal-item">
+        <p class="cta-panel-sub">let's fix something together</p>
+        <h3 class="cta-panel-title">CONTACT</h3>
+        <a class="cta-panel-link" href="contact.html">DROP A LINE ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-name">ALLEN</div>
+        <div class="footer-role"><span class="dot"></span> PRODUCT AND OPERATIONS GENERALIST</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="playground.html">PLAYGROUND</a>
+      </nav>
+      <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Allen Horsfall Odimaa</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

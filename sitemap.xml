@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.allenodimaa.com/</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://allenodimaa.com/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.allenodimaa.com/geo-checker.html</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://allenodimaa.com/about.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.allenodimaa.com/campaign-brief.html</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://allenodimaa.com/services.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.allenodimaa.com/case-studies.html</loc>
-    <lastmod>2026-05-20</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://allenodimaa.com/internal-tools.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://allenodimaa.com/analytics-and-reporting.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://allenodimaa.com/pitch-deck-design.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://allenodimaa.com/email-design.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://allenodimaa.com/playground.html</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://allenodimaa.com/contact.html</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

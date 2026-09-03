@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.allenodimaa.com/sitemap.xml
+Sitemap: https://allenodimaa.com/sitemap.xml

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allen — Contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400..900&family=Shantell+Sans:wght@400;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">🙂</div>
+    <div class="nav-collapsible" id="navCollapsible">
+      <a class="nav-link" href="index.html">★ HOME</a>
+      <a class="nav-link" href="about.html">👤 ABOUT</a>
+      <a class="nav-link" href="services.html">▦ SERVICES</a>
+      <a class="nav-link" href="playground.html">◆ PLAYGROUND</a>
+      <div class="nav-spacer"></div>
+      <a class="contact-btn" href="contact.html">♡ CONTACT</a>
+    </div>
+    <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <div class="contact-page">
+    <div class="contact-polaroid left reveal">
+      <div class="tape blue tl"></div>
+      <div class="tape yellow tr"></div>
+      <img class="photo-area" src="images/portrait.png" alt="Portrait">
+      <div class="cap">random shot</div>
+    </div>
+
+    <div class="contact-center reveal">
+      <div class="contact-sayhi">say hi<span class="ul"></span></div>
+
+      <div class="contact-heading-box">
+        <span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span>
+        <h1>CONTACT</h1>
+      </div>
+
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mbgjynve" method="POST">
+        <div class="contact-step" data-step="1">
+          <p class="contact-form-label">GOT A PROJECT, A HARD PROBLEM, OR JUST WANT TO SAY HI? SEND IT OVER. I READ EVERY MESSAGE.</p>
+          <textarea name="message" placeholder="Tell me a story, or a project idea..." required></textarea>
+          <button type="button" class="contact-next">NEXT (1/2)</button>
+        </div>
+
+        <div class="contact-step" data-step="2" hidden>
+          <p class="contact-form-label">WHO AM I TALKING TO?</p>
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <div class="contact-step-actions">
+            <button type="button" class="contact-back">BACK</button>
+            <button type="submit" class="contact-submit">SEND IT (2/2)</button>
+          </div>
+        </div>
+
+        <div class="contact-success" hidden>
+          <p>Sent. I read every message, I\'ll get back to you soon.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="contact-polaroid right reveal">
+      <div class="tape blue tl"></div>
+      <div class="tape yellow tr"></div>
+      <img class="photo-area" src="images/portrait-2.jpg" alt="Portrait">
+      <div class="cap">what is this</div>
+    </div>
+  </div>
+
+  <div class="contact-footer reveal">
+    <div class="contact-footer-line"><span class="arrow">↘</span> Open to new work and good problems</div>
+    <a class="contact-email-link" href="mailto:odimaa.horsfall@gmail.com">odimaa.horsfall@gmail.com</a>
+    <div class="contact-social-pill">
+      <a href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in LINKEDIN</a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-name">ALLEN</div>
+        <div class="footer-role"><span class="dot"></span> PRODUCT AND OPERATIONS GENERALIST</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="about.html">ABOUT</a>
+        <a href="services.html">SERVICES</a>
+        <a href="playground.html">PLAYGROUND</a>
+      </nav>
+      <a class="social li" href="https://www.linkedin.com/in/odimaa-allen-horsfall/" target="_blank" rel="noopener">in</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Allen Horsfall Odimaa</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
